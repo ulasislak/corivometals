@@ -1,0 +1,134 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { analytics, analyticsEnabled } from "@/lib/site";
+import { secondaryButton } from "@/components/styles";
+
+const STORAGE_KEY = "corivo-consent";
+const CONSENT_EVENT = "corivo-consent-change";
+
+type Consent = "accepted" | "rejected";
+
+export function readConsent(): Consent | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const value = window.localStorage.getItem(STORAGE_KEY);
+    if (value === "accepted" || value === "rejected") return value;
+  } catch {
+    return null;
+  }
+  return null;
+}
+
+export function writeConsent(value: Consent) {
+  window.localStorage.setItem(STORAGE_KEY, value);
+  window.dispatchEvent(new Event(CONSENT_EVENT));
+}
+
+export function CookieConsent() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (!analyticsEnabled()) return;
+    if (!readConsent()) setVisible(true);
+  }, []);
+
+  if (!visible) return null;
+
+  return (
+    <div className="no-print border-b border-slate-200 bg-slate-950 text-white">
+      <div className="mx-auto flex max-w-page flex-col gap-4 px-4 py-4 sm:flex-row sm:items-end sm:justify-between">
+        <p className="max-w-3xl text-sm leading-relaxed text-slate-100">
+          Optional analytics stays off unless you accept. The quote form does not need this cookie.{" "}
+          <Link href="/privacy" className="underline decoration-amber-400 underline-offset-4">
+            Privacy
+          </Link>
+        </p>
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            className="inline-flex min-h-11 items-center border border-slate-500 px-4 text-sm font-semibold text-white"
+            onClick={() => {
+              writeConsent("rejected");
+              setVisible(false);
+            }}
+          >
+            Reject
+          </button>
+          <button
+            type="button"
+            className="inline-flex min-h-11 items-center border border-amber-600 bg-amber-500 px-4 text-sm font-semibold text-slate-950"
+            onClick={() => {
+              writeConsent("accepted");
+              setVisible(false);
+            }}
+          >
+            Accept analytics
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function Analytics() {
+  useEffect(() => {
+    if (!analyticsEnabled()) return;
+
+    function sync() {
+      const existing = document.querySelector("script[data-corivo-analytics]");
+      if (readConsent() !== "accepted") {
+        existing?.remove();
+        return;
+      }
+      if (existing || !analytics.src) return;
+      const script = document.createElement("script");
+      script.src = analytics.src;
+      script.defer = true;
+      script.dataset.domain = analytics.domain;
+      script.dataset.corivoAnalytics = "true";
+      document.head.appendChild(script);
+    }
+
+    sync();
+    window.addEventListener(CONSENT_EVENT, sync);
+    return () => window.removeEventListener(CONSENT_EVENT, sync);
+  }, []);
+
+  return null;
+}
+
+export function ConsentPreferences() {
+  const enabled = analyticsEnabled();
+  const [choice, setChoice] = useState("not set");
+
+  useEffect(() => {
+    function sync() {
+      setChoice(readConsent() ?? "not set");
+    }
+    sync();
+    window.addEventListener(CONSENT_EVENT, sync);
+    return () => window.removeEventListener(CONSENT_EVENT, sync);
+  }, []);
+
+  if (!enabled) {
+    return <p>Analytics is not enabled on this site, so no analytics cookie is set.</p>;
+  }
+
+  return (
+    <div className="border border-slate-300 bg-white p-4">
+      <p>
+        Current choice: <span className="font-mono text-sm">{choice}</span>
+      </p>
+      <div className="mt-3 flex flex-wrap gap-2">
+        <button type="button" className={secondaryButton} onClick={() => writeConsent("accepted")}>
+          Accept analytics
+        </button>
+        <button type="button" className={secondaryButton} onClick={() => writeConsent("rejected")}>
+          Reject analytics
+        </button>
+      </div>
+    </div>
+  );
+}

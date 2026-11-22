@@ -32,14 +32,14 @@ Use Node.js 22.23 or newer. The Cloudflare CLI refuses older 22.x releases.
 
 `NEXT_PUBLIC_*` values are baked in at build time. Set `NEXT_PUBLIC_SITE_URL=https://getcorivo.com` before a production build. On Workers Builds, put those variables in the build environment.
 
-These server values are Worker secrets. They are declared in `cloudflare.config.ts` and are not copied from the shell at deploy time:
+These server values are Worker secrets. Add the filled ones in Workers Builds. A secret is included only when its value is set at build time. Resend stays off until those three values exist:
 
 - `SUPABASE_SERVICE_ROLE_KEY`
+- `RATE_LIMIT_SALT`
+- `QUOTE_INBOX_KEY`
 - `RESEND_API_KEY`
 - `RESEND_FROM_EMAIL`
 - `QUOTE_NOTIFY_EMAIL`
-- `RATE_LIMIT_SALT`
-- `QUOTE_INBOX_KEY`
 
 Sign in, build, and send the secrets with the first deploy:
 

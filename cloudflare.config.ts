@@ -1,4 +1,18 @@
+import { existsSync, readFileSync } from "node:fs";
 import { bindings, defineConfig, defineWorker } from "cf/config";
+
+function configured(name: string): boolean {
+  const fromProcess = process.env[name]?.trim();
+  if (fromProcess) return true;
+  if (!existsSync(".env.local")) return false;
+  return readFileSync(".env.local", "utf8")
+    .split(/\r?\n/)
+    .some((line) => line.startsWith(`${name}=`) && line.slice(name.length + 1).trim().length > 0);
+}
+
+function secret(name: string): Record<string, ReturnType<typeof bindings.secret>> {
+  return configured(name) ? { [name]: bindings.secret() } : {};
+}
 
 export default defineConfig({
   worker: defineWorker({
@@ -13,12 +27,12 @@ export default defineConfig({
     },
     env: {
       ASSETS: bindings.assets(),
-      SUPABASE_SERVICE_ROLE_KEY: bindings.secret(),
-      RESEND_API_KEY: bindings.secret(),
-      RESEND_FROM_EMAIL: bindings.secret(),
-      QUOTE_NOTIFY_EMAIL: bindings.secret(),
-      RATE_LIMIT_SALT: bindings.secret(),
-      QUOTE_INBOX_KEY: bindings.secret(),
+      ...secret("SUPABASE_SERVICE_ROLE_KEY"),
+      ...secret("RESEND_API_KEY"),
+      ...secret("RESEND_FROM_EMAIL"),
+      ...secret("QUOTE_NOTIFY_EMAIL"),
+      ...secret("RATE_LIMIT_SALT"),
+      ...secret("QUOTE_INBOX_KEY"),
     },
   }),
 });

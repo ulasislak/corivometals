@@ -1,26 +1,35 @@
 import type { Metadata } from "next";
+import { hrefFor, locales, type Locale } from "@/i18n/locale";
 import { siteDescription, siteName, siteUrl } from "@/lib/site";
 
 type PageMetaInput = {
   title: string;
   description: string;
   path: string;
+  lang?: Locale;
   index?: boolean;
 };
 
-export function pageMetadata({ title, description, path, index = true }: PageMetaInput): Metadata {
-  const url = `${siteUrl}${path === "/" ? "" : path}`;
+export function pageMetadata({ title, description, path, lang = "en", index = true }: PageMetaInput): Metadata {
+  const canonical = hrefFor(lang, path);
+  const url = `${siteUrl}${canonical}`;
   return {
     title,
     description,
-    alternates: { canonical: path },
+    alternates: {
+      canonical,
+      languages: {
+        ...Object.fromEntries(locales.map((locale) => [locale, hrefFor(locale, path)])),
+        "x-default": hrefFor("en", path),
+      },
+    },
     robots: index ? { index: true, follow: true } : { index: false, follow: false },
     openGraph: {
       title: `${title} · ${siteName}`,
       description,
       url,
       siteName,
-      locale: "en_GB",
+      locale: lang === "tr" ? "tr_TR" : lang === "de" ? "de_DE" : "en_GB",
       type: "website",
     },
     twitter: {

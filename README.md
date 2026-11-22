@@ -1,6 +1,6 @@
 # Corivo
 
-Marketing site and quote request form for sheet metal parts, enclosures, and simple CNC parts made in Türkiye.
+Marketing site and quote request form for sheet metal parts, enclosures, and CNC parts made in Türkiye.
 
 ## Stack
 
@@ -14,7 +14,7 @@ Next.js 14 (App Router), TypeScript, Tailwind, Supabase (Postgres and private St
 4. Confirm the `rfq-drawings` bucket is private and limited to 20 MB. Do not add a public storage policy.
 5. Verify the Resend domain used in `RESEND_FROM_EMAIL`.
 6. Set `NEXT_PUBLIC_SITE_URL` to the production origin before building. `NEXT_PUBLIC_*` values are read at build time.
-7. Leave legal identity variables empty until the company record is confirmed. The imprint shows “Not published yet” instead of a made-up address.
+7. Leave legal identity variables empty until the company record is confirmed. The imprint page is unpublished and returns 404.
 
 ## Scripts
 
@@ -29,6 +29,8 @@ The browser posts the form to `/api/rfq`. The server checks a honeypot, a short 
 
 The service role key stays on the server. The anon key can only upload with a signed URL.
 
+Saved requests are listed at `/inbox/<QUOTE_INBOX_KEY>`. That address is not in the menu or the sitemap. A wrong or missing key returns 404.
+
 ## What the site does not claim
 
-No customer logos, testimonials, statistics, certifications, list prices, or instant quotes. The published commitments are a 48-hour quote, a manufacturability note with every quote, a dimensional report and photos with each shipment, and a material certificate or NDA on request.
+No customer logos, testimonials, statistics, certifications, list prices, or instant quotes. The published commitments are a quote within 2 business days, a manufacturability note with every quote, a dimensional report and photos with each shipment, and a material certificate or NDA on request.

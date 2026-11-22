@@ -126,8 +126,8 @@ export function buildReceiptEmail(enquiry: StoredEnquiry): string {
     `Estimated annual quantity: ${annualText(enquiry.estimatedAnnualQuantity)}`,
     `Delivery date: ${deliveryText(enquiry)}`,
     "",
-    "You will hear from us within 48 hours with a price, a lead time, and a manufacturability note.",
-    "If we cannot read a drawing, we will reply to this email and ask for another file. The 48 hours start when the drawing can be read.",
+    "You will hear from us within 2 business days with a price, a lead time, and a manufacturability note.",
+    "If we cannot read a drawing, we will reply to this email and ask for another file. The 2 business days start when the drawing can be read.",
     "",
     "Corivo",
   ].join("\n");

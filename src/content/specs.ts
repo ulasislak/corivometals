@@ -36,7 +36,7 @@ export const toleranceTable: SpecTableData = {
     ["Hole position", "Per your drawing", "Dimensional report with the shipment"],
     ["Welded assembly", "Per your drawing", "Distortion risks called out before production"],
     ["Powder coat", "Per the agreed finish", "Colour and surface written on the quote"],
-    ["Simple CNC", "Per your drawing", "Out-of-scope geometry called out before production"],
+    ["CNC machining", "Per your drawing", "Manufacturability note, then the dimensional report"],
   ],
 };
 
@@ -52,13 +52,13 @@ export const finishTable: SpecTableData = {
 };
 
 export const cncScopeTable: SpecTableData = {
-  caption: "SIMPLE CNC SCOPE",
-  columns: ["Process", "In scope when", "Send"],
+  caption: "CNC MACHINING",
+  columns: ["Process", "What we quote", "Send"],
   rows: [
-    ["Milling", "Prismatic plates, spacers, bosses, small brackets", "STEP and a PDF"],
-    ["Turning", "Straightforward round parts that sit with the assembly", "STEP and a PDF"],
-    ["Threads and fits", "The callout is on the drawing", "The drawing, not a verbal fit"],
-    ["Outside this scope", "We will say so before you order", "Manufacturability note"],
+    ["Milling", "Prismatic parts, pockets, faces, and holes", "STEP and a PDF"],
+    ["Turning", "Round parts", "STEP and a PDF"],
+    ["Threads and fits", "The callout on the drawing", "The drawing, not a verbal fit"],
+    ["With sheet metal or an enclosure", "The same request, when the notes say so", "The drawing set"],
   ],
 };
 

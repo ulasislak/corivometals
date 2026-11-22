@@ -10,7 +10,7 @@ export const headerLinks = [
 export const productLinks = [
   { href: "/sheet-metal", label: "Sheet metal" },
   { href: "/enclosures", label: "Enclosures and welded assemblies" },
-  { href: "/cnc-parts", label: "Simple CNC parts" },
+  { href: "/cnc-parts", label: "CNC machining" },
 ] as const;
 
 export const companyLinks = [
@@ -24,5 +24,4 @@ export const companyLinks = [
 export const legalLinks = [
   { href: "/privacy", label: "Privacy" },
   { href: "/terms", label: "Terms" },
-  { href: "/imprint", label: "Imprint" },
 ] as const;

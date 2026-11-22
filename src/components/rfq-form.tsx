@@ -11,10 +11,13 @@ import {
   type ReactElement,
   type ReactNode,
 } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { FOCUS_COUNTRIES, MATERIALS, OTHER_COUNTRIES } from "@/content/options";
+import { getCopy } from "@/i18n/copy";
+import { hrefFor, localeFromPath } from "@/i18n/locale";
+import { localizeMessage } from "@/i18n/messages";
 import { EMPTY_UTM, loadAttribution, type UtmFields } from "@/lib/rfq/attribution";
-import { BUCKET, evaluateIncomingFiles, formatBytes, MAX_FILES } from "@/lib/rfq/files";
+import { BUCKET, evaluateIncomingFiles, formatBytes } from "@/lib/rfq/files";
 import { parseRfqPayload } from "@/lib/rfq/schema";
 import { browserSupabase, supabaseBrowserConfigured } from "@/lib/supabase/browser";
 import { contactEmail } from "@/lib/site";
@@ -82,6 +85,10 @@ function signatureOf(files: SelectedFile[]): string {
 
 export function RfqForm({ id = "quote" }: { id?: string }) {
   const router = useRouter();
+  const pathname = usePathname() ?? "/en";
+  const lang = localeFromPath(pathname);
+  const copy = getCopy(lang).form;
+  const t = (message: string) => localizeMessage(lang, message);
   const reactId = useId();
   const startedAt = useRef(0);
   const fileInput = useRef<HTMLInputElement>(null);
@@ -142,7 +149,17 @@ export function RfqForm({ id = "quote" }: { id?: string }) {
     setFileErrors(errors);
     setPending(null);
     const added = next.length - selected.length;
-    setStatus(errors[0] ?? (added > 0 ? `${added} file${added === 1 ? "" : "s"} added.` : "No files added."));
+    const addedLabel =
+      lang === "tr"
+        ? added === 1
+          ? "1 dosya eklendi."
+          : `${added} dosya eklendi.`
+        : lang === "de"
+          ? added === 1
+            ? "1 Datei hinzugefügt."
+            : `${added} Dateien hinzugefügt.`
+          : `${added} file${added === 1 ? "" : "s"} added.`;
+    setStatus(errors[0] ? t(errors[0]) : added > 0 ? addedLabel : copy.noneAdded);
     if (fileInput.current) fileInput.current.value = "";
   }
 
@@ -150,7 +167,7 @@ export function RfqForm({ id = "quote" }: { id?: string }) {
     setSelected((current) => current.filter((_, itemIndex) => itemIndex !== index));
     setPending(null);
     setFileErrors([]);
-    setStatus("File removed.");
+    setStatus(copy.removed);
   }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -176,6 +193,7 @@ export function RfqForm({ id = "quote" }: { id?: string }) {
       utmContent: String(formData.get("utm_content") ?? ""),
       referrer: String(formData.get("referrer") ?? ""),
       page: String(formData.get("page") ?? ""),
+      locale: lang,
       corivoHp: String(formData.get("corivo_hp") ?? ""),
       startedAt: startedAt.current,
     };
@@ -208,7 +226,7 @@ export function RfqForm({ id = "quote" }: { id?: string }) {
       let current = pending && pending.signature === signature ? pending : null;
 
       if (!current) {
-        setStatus("Checking the request.");
+        setStatus(copy.checking);
         const prepared = await postJson("/api/rfq", body);
         if (!prepared.ok || !prepared.id || !prepared.uploads || prepared.uploads.length !== selected.length) {
           setFormError(prepared.error ?? "The quote database did not accept the request.");
@@ -225,7 +243,7 @@ export function RfqForm({ id = "quote" }: { id?: string }) {
           const file = selected[index]?.file;
           const ticket = current.uploads[index];
           if (!file || !ticket) throw new Error("The upload list does not match the drawings.");
-          setStatus(`Uploading ${file.name}.`);
+          setStatus(`${copy.uploading} ${file.name}.`);
           const uploaded = await supabase.storage.from(BUCKET).uploadToSignedUrl(ticket.path, ticket.token, file, {
             upsert: true,
             contentType: file.type || "application/octet-stream",
@@ -238,7 +256,7 @@ export function RfqForm({ id = "quote" }: { id?: string }) {
         setPending(current);
       }
 
-      setStatus("Sending the request.");
+      setStatus(copy.sendingStatus);
       const completed = await postJson("/api/rfq/complete", { id: current.id });
       if (!completed.ok || !completed.id) {
         if (completed.reset) setPending(null);
@@ -251,7 +269,7 @@ export function RfqForm({ id = "quote" }: { id?: string }) {
       } catch {
         // The reference is still in the confirmation email.
       }
-      router.push("/thank-you");
+      router.push(hrefFor(lang, "/thank-you"));
     } catch (error) {
       setFormError(error instanceof Error ? error.message : "The request could not be sent.");
     } finally {
@@ -277,19 +295,15 @@ export function RfqForm({ id = "quote" }: { id?: string }) {
     >
       <div className="flex items-center justify-between border-b border-slate-200 px-4 py-3 sm:px-5">
         <p className="font-mono text-xs tracking-[0.18em] text-slate-600">RFQ</p>
-        <p className="font-mono text-xs tracking-[0.18em] text-amber-800">48 H</p>
+        <p className="font-mono text-xs tracking-[0.18em] text-amber-800">{copy.window}</p>
       </div>
       <div className="px-4 py-5 sm:px-5">
-        <h2 className="text-xl font-semibold text-slate-950">Request a quote</h2>
-        <p className="mt-2 text-sm leading-relaxed text-slate-700">
-          We reply within 48 hours of a complete request. The reply includes a price, a lead time, and a manufacturability note.
-        </p>
-        <p className="mt-2 text-sm text-slate-600">
-          A drawing or a description of the part is required. Other required fields are marked.
-        </p>
+        <h2 className="text-xl font-semibold text-slate-950">{copy.title}</h2>
+        <p className="mt-2 text-sm leading-relaxed text-slate-700">{copy.intro}</p>
+        <p className="mt-2 text-sm text-slate-600">{copy.requiredNote}</p>
 
         <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
-          <label htmlFor={field("hp")}>Leave this field empty</label>
+          <label htmlFor={field("hp")}>{copy.honeypot}</label>
           <input id={field("hp")} name="corivo_hp" type="text" tabIndex={-1} autoComplete="off" defaultValue="" />
         </div>
         <input type="hidden" name="utm_source" value={utm.utmSource} />
@@ -303,13 +317,13 @@ export function RfqForm({ id = "quote" }: { id?: string }) {
         <div ref={summaryRef} tabIndex={-1} className="outline-none">
           {showSummary ? (
             <div role="alert" className="mt-4 border border-red-800 bg-red-50 px-3 py-3 text-sm text-red-900">
-              <p>{formError || "Check the highlighted fields."}</p>
+              <p>{formError ? t(formError) : t("Check the highlighted fields.")}</p>
               {Object.entries(fieldErrors).length > 0 ? (
                 <ul className="mt-2 list-disc pl-5">
                   {Object.entries(fieldErrors).map(([key, message]) => (
                     <li key={key}>
                       <a href={`#${field(key)}`} className="underline">
-                        {message}
+                        {t(message)}
                       </a>
                     </li>
                   ))}
@@ -320,13 +334,13 @@ export function RfqForm({ id = "quote" }: { id?: string }) {
         </div>
 
         <fieldset disabled={submitting} className="mt-5 grid gap-4">
-          <legend className="sr-only">Quote request</legend>
+          <legend className="sr-only">{copy.title}</legend>
           <div>
             <label htmlFor={field("files")} className="text-sm font-medium text-slate-950">
-              Drawings
+              {copy.drawings}
             </label>
             <p id={field("files-hint")} className="mt-1 text-sm text-slate-600">
-              DXF, DWG, STEP, or PDF. Up to {MAX_FILES} files, 20 MB each. Required unless the notes describe the part. Need an NDA first? Attach a one-page PDF that says so.
+              {copy.drawingsHint}
             </p>
             <div
               className={`mt-2 border border-dashed px-3 py-4 ${dragOver ? "border-amber-600 bg-amber-50" : "border-slate-300 bg-slate-50"}`}
@@ -355,9 +369,9 @@ export function RfqForm({ id = "quote" }: { id?: string }) {
                 }}
               />
               <label htmlFor={field("files")} className={`${primaryButton} cursor-pointer`}>
-                Choose files
+                {copy.choose}
               </label>
-              <p className="mt-2 text-sm text-slate-600">Or drop files here.</p>
+              <p className="mt-2 text-sm text-slate-600">{copy.drop}</p>
             </div>
             {selected.length > 0 ? (
               <ul className="mt-3 divide-y divide-slate-200 border border-slate-300">
@@ -371,7 +385,7 @@ export function RfqForm({ id = "quote" }: { id?: string }) {
                         className="min-h-11 text-sm font-semibold text-amber-800 underline decoration-amber-800/40"
                         onClick={() => removeFile(index)}
                       >
-                        Remove <span className="sr-only">{item.file.name}</span>
+                        {copy.remove} <span className="sr-only">{item.file.name}</span>
                       </button>
                     </span>
                   </li>
@@ -379,49 +393,55 @@ export function RfqForm({ id = "quote" }: { id?: string }) {
               </ul>
             ) : null}
             <p id={field("files-error")} className="mt-2 text-sm text-red-800" role={fileErrors.length ? "alert" : undefined}>
-              {fileErrors.join(" ")}
+              {fileErrors.map((message) => t(message)).join(" ")}
             </p>
           </div>
           <Field
-            label="Notes"
-            error={fieldErrors.notes}
-            hint="Required if you are not attaching a drawing. Describe the part, or add powder coat RAL, hardware, weld notes, or an NDA request."
+            label={copy.notes}
+            error={fieldErrors.notes ? t(fieldErrors.notes) : undefined}
+            hint={copy.notesHint}
             fieldId={field("notes")}
           >
             <textarea id={field("notes")} name="notes" rows={4} maxLength={4000} className={fieldClass} />
           </Field>
-          <Field label="Work email" required error={fieldErrors.email} fieldId={field("email")}>
+          <Field label={copy.email} required error={fieldErrors.email ? t(fieldErrors.email) : undefined} fieldId={field("email")}>
             <input id={field("email")} name="email" type="email" autoComplete="email" inputMode="email" required className={fieldClass} />
           </Field>
           <div className="grid gap-4 sm:grid-cols-2">
             <Field
-              label="Material"
+              label={copy.material}
               required
-              error={fieldErrors.material}
-              hint="If the part uses more than one grade, pick the main one and list the others in notes."
+              error={fieldErrors.material ? t(fieldErrors.material) : undefined}
+              hint={copy.materialHint}
               fieldId={field("material")}
             >
               <select id={field("material")} name="material" required defaultValue="" className={fieldClass}>
                 <option value="" disabled>
-                  Select a material
+                  {copy.materialPlaceholder}
                 </option>
                 {MATERIALS.map((material) => (
                   <option key={material.value} value={material.value}>
-                    {material.label}
+                    {copy.materials[material.value] ?? material.label}
                   </option>
                 ))}
               </select>
             </Field>
-            <Field label="Quantity (this order)" required error={fieldErrors.quantity} hint="Pieces in this batch." fieldId={field("quantity")}>
+            <Field
+              label={copy.quantity}
+              required
+              error={fieldErrors.quantity ? t(fieldErrors.quantity) : undefined}
+              hint={copy.quantityHint}
+              fieldId={field("quantity")}
+            >
               <input id={field("quantity")} name="quantity" inputMode="numeric" required className={fieldClass} />
             </Field>
           </div>
           <div className="border-l-2 border-amber-500 pl-3">
             <Field
-              label="Estimated annual quantity (pieces)"
+              label={copy.annual}
               required
-              error={fieldErrors.estimatedAnnualQuantity}
-              hint="Pieces you expect over twelve months, including later batches."
+              error={fieldErrors.estimatedAnnualQuantity ? t(fieldErrors.estimatedAnnualQuantity) : undefined}
+              hint={copy.annualHint}
               fieldId={field("estimatedAnnualQuantity")}
             >
               <input
@@ -443,51 +463,53 @@ export function RfqForm({ id = "quote" }: { id?: string }) {
                 onChange={(event) => setAnnualUnknown(event.target.checked)}
               />
               <label htmlFor={field("annual-unknown")} className="text-sm text-slate-800">
-                I don&apos;t know yet
+                {copy.annualUnknown}
               </label>
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="Name" required error={fieldErrors.name} hint="The person we should reply to." fieldId={field("name")}>
+            <Field label={copy.name} required error={fieldErrors.name ? t(fieldErrors.name) : undefined} hint={copy.nameHint} fieldId={field("name")}>
               <input id={field("name")} name="name" autoComplete="name" required className={fieldClass} />
             </Field>
-            <Field label="Company" required error={fieldErrors.company} fieldId={field("company")}>
+            <Field label={copy.company} required error={fieldErrors.company ? t(fieldErrors.company) : undefined} fieldId={field("company")}>
               <input id={field("company")} name="company" autoComplete="organization" required className={fieldClass} />
             </Field>
           </div>
-          <Field label="Country" optional error={fieldErrors.country} fieldId={field("country")}>
+          <Field label={copy.country} optional optionalLabel={copy.optional} error={fieldErrors.country ? t(fieldErrors.country) : undefined} fieldId={field("country")}>
             <select id={field("country")} name="country" defaultValue="" className={fieldClass}>
-              <option value="">Select a country</option>
-              <optgroup label="Focus">
+              <option value="">{copy.countryPlaceholder}</option>
+              <optgroup label={copy.countryFocus}>
                 {FOCUS_COUNTRIES.map((country) => (
                   <option key={country} value={country}>
-                    {country}
+                    {copy.countries[country] ?? country}
                   </option>
                 ))}
               </optgroup>
-              <optgroup label="Other">
+              <optgroup label={copy.countryOther}>
                 {OTHER_COUNTRIES.map((country) => (
                   <option key={country} value={country}>
-                    {country}
+                    {copy.countries[country] ?? country}
                   </option>
                 ))}
               </optgroup>
             </select>
           </Field>
           <Field
-            label="Thickness (mm)"
+            label={copy.thickness}
             optional
-            error={fieldErrors.thickness}
-            hint="Example: 2.0. Leave blank if the drawing states it, or you do not know it yet."
+            optionalLabel={copy.optional}
+            error={fieldErrors.thickness ? t(fieldErrors.thickness) : undefined}
+            hint={copy.thicknessHint}
             fieldId={field("thickness")}
           >
             <input id={field("thickness")} name="thickness" inputMode="decimal" className={fieldClass} />
           </Field>
           <Field
-            label="Delivery date"
+            label={copy.delivery}
             optional
-            error={fieldErrors.requiredDeliveryDate}
-            hint="The date you want the parts. Lead time is confirmed on the quote."
+            optionalLabel={copy.optional}
+            error={fieldErrors.requiredDeliveryDate ? t(fieldErrors.requiredDeliveryDate) : undefined}
+            hint={copy.deliveryHint}
             fieldId={field("requiredDeliveryDate")}
           >
             <input
@@ -508,29 +530,29 @@ export function RfqForm({ id = "quote" }: { id?: string }) {
               onChange={(event) => setFlexibleDelivery(event.target.checked)}
             />
             <label htmlFor={field("delivery-flexible")} className="text-sm text-slate-800">
-              Flexible
+              {copy.flexible}
             </label>
           </div>
         </fieldset>
 
         <div className="mt-5 flex flex-col gap-3">
           <button type="submit" className={primaryButton} disabled={!ready || submitting} aria-busy={submitting}>
-            {submitting ? "Sending…" : "Request a quote"}
+            {submitting ? copy.sending : copy.submit}
           </button>
           <p className="text-sm leading-relaxed text-slate-700" aria-live="polite">
             {status}
           </p>
           <p className="text-sm leading-relaxed text-slate-600">
-            Drawings are stored in a private file store and used to prepare the quote.{" "}
-            <a href="/privacy" className="text-amber-800 underline decoration-amber-800/40 underline-offset-4">
-              Privacy
+            {copy.privacyBefore}{" "}
+            <a href={hrefFor(lang, "/privacy")} className="text-amber-800 underline decoration-amber-800/40 underline-offset-4">
+              {getCopy(lang).privacy.title}
             </a>
           </p>
         </div>
         <noscript>
           <p className="mt-4 text-sm text-slate-800">
-            This form uploads drawings from the browser and needs JavaScript.
-            {contactEmail ? ` Email ${contactEmail} with your drawing if JavaScript is unavailable.` : ""}
+            {copy.noscript}
+            {contactEmail ? ` ${copy.noscriptEmail} ${contactEmail}.` : ""}
           </p>
         </noscript>
       </div>
@@ -542,6 +564,7 @@ function Field({
   label,
   required = false,
   optional = false,
+  optionalLabel = "optional",
   error,
   hint,
   fieldId,
@@ -550,6 +573,7 @@ function Field({
   label: string;
   required?: boolean;
   optional?: boolean;
+  optionalLabel?: string;
   error?: string;
   hint?: string;
   fieldId: string;
@@ -569,7 +593,7 @@ function Field({
       <label htmlFor={fieldId} className="text-sm font-medium text-slate-950">
         {label}
         {required ? <span className="text-amber-800"> *</span> : null}
-        {optional ? <span className="font-normal text-slate-500"> optional</span> : null}
+        {optional ? <span className="font-normal text-slate-500"> {optionalLabel}</span> : null}
       </label>
       {hint ? (
         <p id={hintId} className="mt-1 text-sm text-slate-600">

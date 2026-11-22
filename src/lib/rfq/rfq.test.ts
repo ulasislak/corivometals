@@ -175,7 +175,7 @@ describe("emails", () => {
     expect(notify).toContain("Delivery date:");
     expect(receipt).toContain("Reference: ref-1");
     expect(receipt.toLowerCase()).not.toContain("instant");
-    expect(receipt).toContain("48 hours");
+    expect(receipt).toContain("2 business days");
     expect(receipt).toContain("manufacturability note");
 
     const flexible = parseRfqPayload(

@@ -1,7 +1,7 @@
 export const siteName = "Corivo";
 
 export const siteDescription =
-  "Custom sheet metal parts and enclosures made in Türkiye for European machine builders and panel builders. Quote in 48 hours.";
+  "Custom sheet metal parts, enclosures, and CNC parts made in Türkiye for manufacturers in Europe. Quote in 2 business days, with a price, a lead time, and a manufacturability note.";
 
 function trimTrailingSlash(value: string): string {
   return value.replace(/\/+$/, "");
@@ -36,7 +36,7 @@ export function analyticsEnabled(): boolean {
 
 export const policyUpdated = "21 November 2026";
 
-export const quoteHours = 48;
+export const quoteWindow = "2 business days";
 
 export const routes = [
   { path: "/", changeFrequency: "weekly" as const, priority: 1 },
@@ -50,5 +50,4 @@ export const routes = [
   { path: "/request-a-quote", changeFrequency: "monthly" as const, priority: 0.9 },
   { path: "/privacy", changeFrequency: "yearly" as const, priority: 0.3 },
   { path: "/terms", changeFrequency: "yearly" as const, priority: 0.3 },
-  { path: "/imprint", changeFrequency: "yearly" as const, priority: 0.3 },
 ];

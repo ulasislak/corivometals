@@ -1,6 +1,6 @@
-import { steps } from "@/content/process";
+import type { Step } from "@/i18n/copy";
 
-export function ProcessSteps() {
+export function ProcessSteps({ steps }: { steps: readonly Step[] }) {
   return (
     <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {steps.map((step) => (

@@ -5,6 +5,21 @@ export type FaqItem = {
 
 export const faqItems: FaqItem[] = [
   {
+    question: "What does Corivo supply?",
+    answer:
+      "Corivo supplies custom sheet metal parts, welded enclosures, and CNC parts made in Türkiye. A complete request receives a quote within 2 business days. The quote includes a price, a production lead time, and a manufacturability note.",
+  },
+  {
+    question: "Who are the parts for?",
+    answer:
+      "Manufacturers in Europe. Typical buyers are machine and equipment makers, companies that need metal cabinets or housings, and HVAC equipment builders. The same quote path is used for each. A buyer outside those groups can send a drawing too.",
+  },
+  {
+    question: "Where are the parts made?",
+    answer:
+      "The parts are made in Türkiye and supplied to buyers in Europe. Delivery is EXW, FCA, or DAP, whichever Incoterm is printed on the quote.",
+  },
+  {
     question: "Which file formats do you accept?",
     answer:
       "We accept DXF, DWG, STEP (including .stp), and PDF. You can attach up to 8 files, and each file can be up to 20 MB. A DXF or STEP file is more reliable than a PDF alone. If you need an NDA before the production drawing is sent, attach a one-page PDF that says so and write it in the notes. We will send an NDA.",
@@ -17,7 +32,12 @@ export const faqItems: FaqItem[] = [
   {
     question: "How long does a quote take, and how long does production take?",
     answer:
-      "You receive a quote within 48 hours of a complete request: a drawing or a description of the part, a work email, material, quantity, estimated annual quantity, name, and company. Thickness and delivery date are optional. If we cannot read a file, we ask for another copy, and the 48 hours start when the drawing can be read. Production lead time is separate. It is written on the quote and depends on material, quantity, finishing, and the agreed Incoterm.",
+      "You receive a quote within 2 business days of a complete request: a drawing or a description of the part, a work email, material, quantity, estimated annual quantity, name, and company. Thickness and delivery date are optional. If we cannot read a file, we ask for another copy, and the 2 business days start when the drawing can be read. Production lead time is separate. It is written on the quote and depends on material, quantity, finishing, and the agreed Incoterm.",
+  },
+  {
+    question: "What if a CNC part is outside your capability?",
+    answer:
+      "If a part is outside our partner workshops' capability, we tell you within the quote window. Milling and turning to the drawing. Complex multi-axis, certified-aerospace, or very tight-tolerance parts are quoted case by case or declined.",
   },
   {
     question: "Which Incoterms can we use?",

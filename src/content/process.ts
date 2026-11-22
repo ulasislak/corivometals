@@ -7,7 +7,7 @@ export const steps = [
   {
     n: "02",
     title: "Quote with manufacturability note",
-    text: "Within 48 hours you receive a price, a lead time, and a note on anything in the drawing we need confirmed before cutting, bending, or welding.",
+    text: "Within 2 business days you receive a price, a lead time, and a note on anything in the drawing we need confirmed before cutting, bending, or welding.",
   },
   {
     n: "03",
@@ -37,7 +37,7 @@ export const reasons = [
 ] as const;
 
 export const claims = [
-  { label: "Quote", value: "48 hours" },
+  { label: "Quote", value: "2 business days" },
   { label: "With every quote", value: "Manufacturability note" },
   { label: "With every shipment", value: "Dimensional report and photos" },
   { label: "On request", value: "Material certificate and NDA" },

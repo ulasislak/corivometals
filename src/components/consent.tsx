@@ -1,7 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { getCopy } from "@/i18n/copy";
+import { hrefFor, localeFromPath } from "@/i18n/locale";
 import { analytics, analyticsEnabled } from "@/lib/site";
 import { secondaryButton } from "@/components/styles";
 
@@ -27,6 +30,8 @@ export function writeConsent(value: Consent) {
 }
 
 export function CookieConsent() {
+  const lang = localeFromPath(usePathname() ?? "/en");
+  const copy = getCopy(lang).privacy;
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -40,9 +45,9 @@ export function CookieConsent() {
     <div className="no-print border-b border-slate-200 bg-slate-950 text-white">
       <div className="mx-auto flex max-w-page flex-col gap-4 px-4 py-4 sm:flex-row sm:items-end sm:justify-between">
         <p className="max-w-3xl text-sm leading-relaxed text-slate-100">
-          Optional analytics stays off unless you accept. The quote form does not need this cookie.{" "}
-          <Link href="/privacy" className="underline decoration-amber-400 underline-offset-4">
-            Privacy
+          {copy.banner}{" "}
+          <Link href={hrefFor(lang, "/privacy")} className="underline decoration-amber-400 underline-offset-4">
+            {copy.title}
           </Link>
         </p>
         <div className="flex flex-wrap gap-2">
@@ -54,7 +59,7 @@ export function CookieConsent() {
               setVisible(false);
             }}
           >
-            Reject
+            {copy.reject}
           </button>
           <button
             type="button"
@@ -64,7 +69,7 @@ export function CookieConsent() {
               setVisible(false);
             }}
           >
-            Accept analytics
+            {copy.accept}
           </button>
         </div>
       </div>
@@ -100,12 +105,15 @@ export function Analytics() {
 }
 
 export function ConsentPreferences() {
+  const lang = localeFromPath(usePathname() ?? "/en");
+  const copy = getCopy(lang).privacy;
   const enabled = analyticsEnabled();
-  const [choice, setChoice] = useState("not set");
+  const [choice, setChoice] = useState(copy.choiceUnset);
 
   useEffect(() => {
     function sync() {
-      setChoice(readConsent() ?? "not set");
+      const stored = readConsent();
+      setChoice(stored === "accepted" ? copy.choiceAccepted : stored === "rejected" ? copy.choiceRejected : copy.choiceUnset);
     }
     sync();
     window.addEventListener(CONSENT_EVENT, sync);
@@ -113,20 +121,20 @@ export function ConsentPreferences() {
   }, []);
 
   if (!enabled) {
-    return <p>Analytics is not enabled on this site, so no analytics cookie is set.</p>;
+    return <p>{copy.analyticsOff}</p>;
   }
 
   return (
     <div className="border border-slate-300 bg-white p-4">
       <p>
-        Current choice: <span className="font-mono text-sm">{choice}</span>
+        {copy.choice}: <span className="font-mono text-sm">{choice}</span>
       </p>
       <div className="mt-3 flex flex-wrap gap-2">
         <button type="button" className={secondaryButton} onClick={() => writeConsent("accepted")}>
-          Accept analytics
+          {copy.accept}
         </button>
         <button type="button" className={secondaryButton} onClick={() => writeConsent("rejected")}>
-          Reject analytics
+          {copy.reject}
         </button>
       </div>
     </div>

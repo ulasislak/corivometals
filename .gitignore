@@ -5,8 +5,14 @@ coverage
 .env
 .env.local
 .env*.local
+.dev.vars
+.dev.vars.*
 .vercel
 *.log
 tsconfig.tsbuildinfo
 .DS_Store
 Thumbs.db
+/dist/
+.vinext/
+.cloudflare/
+.wrangler/

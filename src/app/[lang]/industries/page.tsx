@@ -6,10 +6,10 @@ import { readPage } from "@/i18n/page";
 import { hrefFor } from "@/i18n/locale";
 import { pageMetadata } from "@/lib/seo";
 
-type Props = { params: { lang: string } };
+type Props = { params: Promise<{ lang: string }> };
 
-export function generateMetadata({ params }: Props): Metadata {
-  const { locale, copy } = readPage(params.lang);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale, copy } = readPage((await params).lang);
   return pageMetadata({
     title: copy.industries.title,
     description: copy.industries.description,
@@ -18,8 +18,8 @@ export function generateMetadata({ params }: Props): Metadata {
   });
 }
 
-export default function IndustriesPage({ params }: Props) {
-  const { locale, copy } = readPage(params.lang);
+export default async function IndustriesPage({ params }: Props) {
+  const { locale, copy } = readPage((await params).lang);
   return (
     <>
       <PageHeader

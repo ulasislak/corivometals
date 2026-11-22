@@ -4,8 +4,8 @@ import { getCopy } from "@/i18n/copy";
 import { hrefFor, isLocale, type Locale } from "@/i18n/locale";
 import { primaryButton } from "@/components/styles";
 
-export function CtaBand({ href = "/request-a-quote", locale }: { href?: string; locale?: Locale }) {
-  const requested = headers().get("x-corivo-locale");
+export async function CtaBand({ href = "/request-a-quote", locale }: { href?: string; locale?: Locale }) {
+  const requested = (await headers()).get("x-corivo-locale");
   const lang = locale ?? (isLocale(requested) ? requested : "en");
   const copy = getCopy(lang);
   return (

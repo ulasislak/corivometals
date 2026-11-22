@@ -11,10 +11,11 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-type Props = { params: { key: string } };
+type Props = { params: Promise<{ key: string }> };
 
 export default async function InboxPage({ params }: Props) {
-  if (!inboxKeyAccepts(params.key, process.env.QUOTE_INBOX_KEY)) notFound();
+  const { key } = await params;
+  if (!inboxKeyAccepts(key, process.env.QUOTE_INBOX_KEY)) notFound();
 
   const loaded = await loadInbox();
   if (!loaded.ok) {

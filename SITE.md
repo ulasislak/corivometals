@@ -60,7 +60,7 @@ Fotoğraf yok. Teknik çizim var:
 | `/request-a-quote` | Aynı teklif formu |
 | `/thank-you` | Talep alındı. Aramada yok |
 | `/inbox/…` | Gelen teklif talepleri. Menüde yok. Adres `QUOTE_INBOX_KEY` ile açılır. Yanlış adres 404 |
-| `/privacy` | Formun topladığı veri, saklama, Supabase, Resend, Vercel, çerez seçimi |
+| `/privacy` | Formun topladığı veri, saklama, Supabase, Resend, Cloudflare, çerez seçimi |
 | `/terms` | Site, teklif, çizim, üretilebilirlik notu, sipariş, teslimat, kontrol, sorumluluk, hukuk |
 | `/imprint` | Kapalı. Menüde, altbilgide ve site haritasında yok. Adres 404 döner |
 

@@ -5,13 +5,14 @@ export function generateStaticParams() {
   return locales.map((lang) => ({ lang }));
 }
 
-export default function LocaleLayout({
+export default async function LocaleLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
-  params: { lang: string };
+  params: Promise<{ lang: string }>;
 }) {
-  if (!isLocale(params.lang)) notFound();
+  const { lang } = await params;
+  if (!isLocale(lang)) notFound();
   return children;
 }

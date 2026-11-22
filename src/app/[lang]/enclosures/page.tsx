@@ -8,10 +8,10 @@ import { readPage } from "@/i18n/page";
 import { hrefFor } from "@/i18n/locale";
 import { pageMetadata } from "@/lib/seo";
 
-type Props = { params: { lang: string } };
+type Props = { params: Promise<{ lang: string }> };
 
-export function generateMetadata({ params }: Props): Metadata {
-  const { locale, copy } = readPage(params.lang);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale, copy } = readPage((await params).lang);
   return pageMetadata({
     title: copy.enclosures.title,
     description: copy.enclosures.description,
@@ -20,8 +20,8 @@ export function generateMetadata({ params }: Props): Metadata {
   });
 }
 
-export default function EnclosuresPage({ params }: Props) {
-  const { locale, copy } = readPage(params.lang);
+export default async function EnclosuresPage({ params }: Props) {
+  const { locale, copy } = readPage((await params).lang);
   const page = copy.enclosures;
   const marks = drawingLabels(locale);
   return (

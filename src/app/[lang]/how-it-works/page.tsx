@@ -5,15 +5,15 @@ import { ProcessSteps } from "@/components/process-steps";
 import { readPage } from "@/i18n/page";
 import { pageMetadata } from "@/lib/seo";
 
-type Props = { params: { lang: string } };
+type Props = { params: Promise<{ lang: string }> };
 
-export function generateMetadata({ params }: Props): Metadata {
-  const { locale, copy } = readPage(params.lang);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale, copy } = readPage((await params).lang);
   return pageMetadata({ title: copy.how.title, description: copy.how.description, path: "/how-it-works", lang: locale });
 }
 
-export default function HowItWorksPage({ params }: Props) {
-  const { copy } = readPage(params.lang);
+export default async function HowItWorksPage({ params }: Props) {
+  const { copy } = readPage((await params).lang);
   return (
     <>
       <PageHeader kicker={copy.how.kicker} title={copy.how.heading} lede={copy.how.lede} crumb={copy.how.crumb} path="/how-it-works" />

@@ -3,15 +3,15 @@ import { PageHeader } from "@/components/page-header";
 import { readPage } from "@/i18n/page";
 import { pageMetadata } from "@/lib/seo";
 
-type Props = { params: { lang: string } };
+type Props = { params: Promise<{ lang: string }> };
 
-export function generateMetadata({ params }: Props): Metadata {
-  const { locale, copy } = readPage(params.lang);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale, copy } = readPage((await params).lang);
   return pageMetadata({ title: copy.terms.title, description: copy.terms.description, path: "/terms", lang: locale });
 }
 
-export default function TermsPage({ params }: Props) {
-  const { copy } = readPage(params.lang);
+export default async function TermsPage({ params }: Props) {
+  const { copy } = readPage((await params).lang);
   const page = copy.terms;
   return (
     <>

@@ -8,15 +8,15 @@ import { readPage } from "@/i18n/page";
 import { hrefFor } from "@/i18n/locale";
 import { pageMetadata } from "@/lib/seo";
 
-type Props = { params: { lang: string } };
+type Props = { params: Promise<{ lang: string }> };
 
-export function generateMetadata({ params }: Props): Metadata {
-  const { locale, copy } = readPage(params.lang);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale, copy } = readPage((await params).lang);
   return pageMetadata({ title: copy.sheet.title, description: copy.sheet.description, path: "/sheet-metal", lang: locale });
 }
 
-export default function SheetMetalPage({ params }: Props) {
-  const { locale, copy } = readPage(params.lang);
+export default async function SheetMetalPage({ params }: Props) {
+  const { locale, copy } = readPage((await params).lang);
   const sheet = copy.sheet;
   const marks = drawingLabels(locale);
   return (

@@ -13,15 +13,15 @@ import { hrefFor } from "@/i18n/locale";
 import { faqPageJsonLd } from "@/lib/json-ld";
 import { pageMetadata } from "@/lib/seo";
 
-type Props = { params: { lang: string } };
+type Props = { params: Promise<{ lang: string }> };
 
-export function generateMetadata({ params }: Props): Metadata {
-  const { locale, copy } = readPage(params.lang);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale, copy } = readPage((await params).lang);
   return pageMetadata({ title: copy.home.title, description: copy.description, path: "/", lang: locale });
 }
 
-export default function HomePage({ params }: Props) {
-  const { locale, copy } = readPage(params.lang);
+export default async function HomePage({ params }: Props) {
+  const { locale, copy } = readPage((await params).lang);
   const marks = drawingLabels(locale);
   const drawings = {
     tolerance: <SheetDrawing flat={marks.flat} bend={marks.bend} />,

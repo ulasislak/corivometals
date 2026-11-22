@@ -6,15 +6,15 @@ import { readPage } from "@/i18n/page";
 import { company, contactEmail } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
 
-type Props = { params: { lang: string } };
+type Props = { params: Promise<{ lang: string }> };
 
-export function generateMetadata({ params }: Props): Metadata {
-  const { locale, copy } = readPage(params.lang);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale, copy } = readPage((await params).lang);
   return pageMetadata({ title: copy.privacy.title, description: copy.privacy.description, path: "/privacy", lang: locale });
 }
 
-export default function PrivacyPage({ params }: Props) {
-  const { copy } = readPage(params.lang);
+export default async function PrivacyPage({ params }: Props) {
+  const { copy } = readPage((await params).lang);
   const page = copy.privacy;
   const controller = company.legalName || copy.notPublished;
   return (
@@ -59,7 +59,7 @@ export default function PrivacyPage({ params }: Props) {
             {page.resend} <ExternalLink href="https://resend.com/legal/privacy-policy">{page.policy}</ExternalLink>.
           </li>
           <li>
-            {page.vercel} <ExternalLink href="https://vercel.com/legal/privacy-policy">{page.policy}</ExternalLink>.
+            {page.host} <ExternalLink href="https://www.cloudflare.com/privacypolicy/">{page.policy}</ExternalLink>.
           </li>
         </ul>
         <p>{page.region}</p>

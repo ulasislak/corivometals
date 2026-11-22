@@ -3,8 +3,8 @@ import { headers } from "next/headers";
 import { getCopy } from "@/i18n/copy";
 import { hrefFor, isLocale } from "@/i18n/locale";
 
-export function NotFoundView() {
-  const requested = headers().get("x-corivo-locale");
+export async function NotFoundView() {
+  const requested = (await headers()).get("x-corivo-locale");
   const lang = isLocale(requested) ? requested : "en";
   const copy = getCopy(lang).missing;
   return (

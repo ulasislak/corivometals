@@ -5,7 +5,7 @@ import { getCopy } from "@/i18n/copy";
 import { hrefFor, isLocale } from "@/i18n/locale";
 import { breadcrumbJsonLd } from "@/lib/json-ld";
 
-export function PageHeader({
+export async function PageHeader({
   kicker,
   title,
   lede,
@@ -18,7 +18,7 @@ export function PageHeader({
   crumb: string;
   path: string;
 }) {
-  const requested = headers().get("x-corivo-locale");
+  const requested = (await headers()).get("x-corivo-locale");
   const lang = isLocale(requested) ? requested : "en";
   const home = getCopy(lang).missing.home;
   const homePath = hrefFor(lang, "/");

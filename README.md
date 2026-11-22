@@ -4,7 +4,7 @@ Marketing site and quote request form for sheet metal parts, enclosures, and CNC
 
 ## Stack
 
-Next.js 14 (App Router), TypeScript, Tailwind, Supabase (Postgres and private Storage), Resend, Vercel.
+Next.js 15 (App Router), TypeScript, Tailwind, Supabase (Postgres and private Storage), Resend, Cloudflare Workers.
 
 ## Setup
 
@@ -19,9 +19,39 @@ Next.js 14 (App Router), TypeScript, Tailwind, Supabase (Postgres and private St
 ## Scripts
 
 - `npm run dev` — local site
+- `npm run dev:vinext` — local site in the Workers runtime
 - `npm run test` — validation, file rules, and copy checks
 - `npm run typecheck`
-- `npm run build`
+- `npm run build` — Next.js production build
+- `npm run build:vinext` — Cloudflare Workers build
+- `npm run deploy:vinext` — build and deploy the Worker
+
+## Cloudflare
+
+Use Node.js 22.23 or newer. The Cloudflare CLI refuses older 22.x releases.
+
+`NEXT_PUBLIC_*` values are baked in at build time. Set `NEXT_PUBLIC_SITE_URL=https://getcorivo.com` before a production build. On Workers Builds, put those variables in the build environment.
+
+These server values are Worker secrets. They are declared in `cloudflare.config.ts` and are not copied from the shell at deploy time:
+
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `RESEND_API_KEY`
+- `RESEND_FROM_EMAIL`
+- `QUOTE_NOTIFY_EMAIL`
+- `RATE_LIMIT_SALT`
+- `QUOTE_INBOX_KEY`
+
+Sign in, build, and send the secrets with the first deploy:
+
+```
+npx cf auth login
+npm run build:vinext
+npx cf deploy --prebuilt --mode production --secrets-file .env.local
+```
+
+After the secrets exist on the Worker, later deploys are `npm run deploy:vinext`. A deploy does not remove secrets.
+
+For Workers Builds, leave the build command empty. Deploy command: `npm run deploy:vinext`. Preview command: `npx vinext-cloudflare previews deploy`. The Worker name in Cloudflare must be `corivo`.
 
 ## Quote flow
 

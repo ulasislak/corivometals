@@ -147,7 +147,7 @@ export type Copy = {
     processorsLead: string;
     supabase: string;
     resend: string;
-    vercel: string;
+    host: string;
     policy: string;
     region: string;
     cookiesTitle: string;
@@ -577,7 +577,7 @@ const en: Copy = {
     processorsLead: "We do not sell enquiry data. These providers process it to run the site:",
     supabase: "Supabase stores the enquiry row and the private drawing bucket. See the",
     resend: "Resend sends the notification to us and the receipt to you. See the",
-    vercel: "Vercel hosts the website. See the",
+    host: "Cloudflare hosts the website. See the",
     policy: "privacy policy",
     region: "The region is the one configured on those projects. Their terms describe any transfer outside the country you are in. Drawings are not published on a public page. Download links in the internal notification expire after seven days.",
     cookiesTitle: "Cookies and storage in the browser",
@@ -1061,7 +1061,7 @@ function turkish(): Copy {
     processorsLead: "Talep verisini satmayız. Siteyi çalıştırmak için şu sağlayıcılar işler:",
     supabase: "Supabase talep satırını ve özel çizim alanını saklar. Bkz.",
     resend: "Resend bize bildirimi, size alındı yazısını gönderir. Bkz.",
-    vercel: "Vercel siteyi barındırır. Bkz.",
+    host: "Cloudflare siteyi barındırır. Bkz.",
     policy: "gizlilik politikası",
     region: "Bölge, o projelerde ayarlanan bölgedir. Bulunduğunuz ülkenin dışına aktarım, onların koşullarında anlatılır. Çizimler herkese açık bir sayfada yayımlanmaz. İç bildirimdeki indirme bağlantıları yedi gün sonra sona erer.",
     cookiesTitle: "Çerezler ve tarayıcıda saklama",

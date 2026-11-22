@@ -314,7 +314,7 @@ export function applyGerman(copy: Copy): void {
     processorsLead: "Wir verkaufen Anfragedaten nicht. Diese Anbieter verarbeiten sie, um die Website zu betreiben:",
     supabase: "Supabase speichert den Anfragedatensatz und den privaten Zeichnungsspeicher. Siehe die",
     resend: "Resend sendet die Benachrichtigung an uns und die Empfangsbestätigung an Sie. Siehe die",
-    vercel: "Vercel betreibt die Website. Siehe die",
+    host: "Cloudflare betreibt die Website. Siehe die",
     policy: "Datenschutzerklärung",
     region: "Die Region ist die, die in diesen Projekten eingestellt ist. Deren Bedingungen beschreiben eine Übermittlung außerhalb des Landes, in dem Sie sind. Zeichnungen werden nicht auf einer öffentlichen Seite veröffentlicht. Download-Links in der internen Benachrichtigung laufen nach sieben Tagen ab.",
     cookiesTitle: "Cookies und Speicher im Browser",

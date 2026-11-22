@@ -31,8 +31,8 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const requested = headers().get("x-corivo-locale");
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const requested = (await headers()).get("x-corivo-locale");
   const lang = isLocale(requested) ? requested : "en";
   const copy = getCopy(lang);
   return (

@@ -4,8 +4,8 @@ import { getCopy } from "@/i18n/copy";
 import { hrefFor, isLocale, type Locale } from "@/i18n/locale";
 import { company, contactEmail, contactPhone } from "@/lib/site";
 
-export function SiteFooter() {
-  const requested = headers().get("x-corivo-locale");
+export async function SiteFooter() {
+  const requested = (await headers()).get("x-corivo-locale");
   const lang = isLocale(requested) ? requested : "en";
   const copy = getCopy(lang);
   const year = new Date().getFullYear();

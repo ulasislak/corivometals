@@ -5,10 +5,10 @@ import { readPage } from "@/i18n/page";
 import { hrefFor } from "@/i18n/locale";
 import { pageMetadata } from "@/lib/seo";
 
-type Props = { params: { lang: string } };
+type Props = { params: Promise<{ lang: string }> };
 
-export function generateMetadata({ params }: Props): Metadata {
-  const { locale, copy } = readPage(params.lang);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale, copy } = readPage((await params).lang);
   return pageMetadata({
     title: copy.thanks.title,
     description: copy.thanks.description,
@@ -18,8 +18,8 @@ export function generateMetadata({ params }: Props): Metadata {
   });
 }
 
-export default function ThankYouPage({ params }: Props) {
-  const { locale, copy } = readPage(params.lang);
+export default async function ThankYouPage({ params }: Props) {
+  const { locale, copy } = readPage((await params).lang);
   return (
     <div className="mx-auto max-w-page px-4 py-16">
       <div className="max-w-2xl border border-slate-300 bg-white p-6 sm:p-8">

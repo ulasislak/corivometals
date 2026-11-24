@@ -61,6 +61,9 @@ export default async function PrivacyPage({ params }: Props) {
           <li>
             {page.host} <ExternalLink href="https://www.cloudflare.com/privacypolicy/">{page.policy}</ExternalLink>.
           </li>
+          <li>
+            {page.google} <ExternalLink href="https://policies.google.com/privacy">{page.policy}</ExternalLink>.
+          </li>
         </ul>
         <p>{page.region}</p>
         <h2>{page.cookiesTitle}</h2>

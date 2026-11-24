@@ -4,10 +4,13 @@ import { routes, siteUrl } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
 
+const lastModified = new Date("2026-11-24T00:00:00.000Z");
+
 export default function sitemap(): MetadataRoute.Sitemap {
   return locales.flatMap((lang) =>
     routes.map((route) => ({
       url: `${siteUrl}${hrefFor(lang, route.path)}`,
+      lastModified,
       changeFrequency: route.changeFrequency,
       priority: route.priority,
       alternates: {

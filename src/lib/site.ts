@@ -25,16 +25,18 @@ export const company = {
   representative: process.env.NEXT_PUBLIC_COMPANY_REPRESENTATIVE?.trim() || "",
 };
 
+export const gtmId = "GTM-PT4J7PHX";
+
 export const analytics = {
   src: process.env.NEXT_PUBLIC_ANALYTICS_SRC?.trim() || "",
   domain: process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN?.trim() || "",
 };
 
 export function analyticsEnabled(): boolean {
-  return Boolean(analytics.src && analytics.domain);
+  return Boolean(gtmId);
 }
 
-export const policyUpdated = "21 November 2026";
+export const policyUpdated = "24 November 2026";
 
 export const quoteWindow = "2 business days";
 

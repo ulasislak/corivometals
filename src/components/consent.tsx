@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getCopy } from "@/i18n/copy";
 import { hrefFor, localeFromPath } from "@/i18n/locale";
-import { analytics, analyticsEnabled } from "@/lib/site";
+import { analyticsEnabled, gtmId } from "@/lib/site";
 import { secondaryButton } from "@/components/styles";
 
 const STORAGE_KEY = "corivo-consent";
@@ -77,23 +77,34 @@ export function CookieConsent() {
   );
 }
 
+type DataLayerWindow = Window & {
+  dataLayer?: unknown[];
+  gtag?: (...args: unknown[]) => void;
+};
+
+function installGtm() {
+  if (document.querySelector("script[data-corivo-gtm]")) return;
+  const target = window as DataLayerWindow;
+  target.dataLayer = target.dataLayer ?? [];
+  target.gtag = function gtag() {
+    target.dataLayer?.push(arguments);
+  };
+  target.gtag("js", new Date());
+  target.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
+  const script = document.createElement("script");
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtm.js?id=${gtmId}`;
+  script.dataset.corivoGtm = "true";
+  document.head.appendChild(script);
+}
+
 export function Analytics() {
   useEffect(() => {
     if (!analyticsEnabled()) return;
 
     function sync() {
-      const existing = document.querySelector("script[data-corivo-analytics]");
-      if (readConsent() !== "accepted") {
-        existing?.remove();
-        return;
-      }
-      if (existing || !analytics.src) return;
-      const script = document.createElement("script");
-      script.src = analytics.src;
-      script.defer = true;
-      script.dataset.domain = analytics.domain;
-      script.dataset.corivoAnalytics = "true";
-      document.head.appendChild(script);
+      if (readConsent() !== "accepted") return;
+      installGtm();
     }
 
     sync();

@@ -148,6 +148,7 @@ export type Copy = {
     supabase: string;
     resend: string;
     host: string;
+    google: string;
     policy: string;
     region: string;
     cookiesTitle: string;
@@ -554,7 +555,7 @@ const en: Copy = {
     description: "How Corivo handles quote requests, drawings, analytics cookies, and the rights of people who send an enquiry.",
     kicker: "LEGAL",
     heading: "Privacy",
-    lede: "This page describes what the quote form collects, why it is kept, and who else processes it. It was last updated on 21 November 2026.",
+    lede: "This page describes what the quote form collects, why it is kept, and who else processes it. It was last updated on 24 November 2026.",
     crumb: "Privacy",
     updated: "Last updated",
     who: "Who is responsible",
@@ -578,6 +579,7 @@ const en: Copy = {
     supabase: "Supabase stores the enquiry row and the private drawing bucket. See the",
     resend: "Resend sends the notification to us and the receipt to you. See the",
     host: "Cloudflare hosts the website. See the",
+    google: "Google Tag Manager loads only after you accept analytics. See the",
     policy: "privacy policy",
     region: "The region is the one configured on those projects. Their terms describe any transfer outside the country you are in. Drawings are not published on a public page. Download links in the internal notification expire after seven days.",
     cookiesTitle: "Cookies and storage in the browser",
@@ -1038,7 +1040,7 @@ function turkish(): Copy {
     description: "Corivo’nun teklif taleplerini, çizimleri, analiz çerezlerini ve talep gönderenlerin haklarını nasıl ele aldığı.",
     kicker: "YASAL",
     heading: "Gizlilik",
-    lede: "Bu sayfa teklif formunun ne topladığını, neden tutulduğunu ve başka kimlerin işlediğini anlatır. Son güncelleme 21 Kasım 2026.",
+    lede: "Bu sayfa teklif formunun ne topladığını, neden tutulduğunu ve başka kimlerin işlediğini anlatır. Son güncelleme 24 Kasım 2026.",
     crumb: "Gizlilik",
     updated: "Son güncelleme",
     who: "Sorumlu kim",
@@ -1062,6 +1064,7 @@ function turkish(): Copy {
     supabase: "Supabase talep satırını ve özel çizim alanını saklar. Bkz.",
     resend: "Resend bize bildirimi, size alındı yazısını gönderir. Bkz.",
     host: "Cloudflare siteyi barındırır. Bkz.",
+    google: "Google Tag Manager yalnızca analizi kabul edince yüklenir. Bkz.",
     policy: "gizlilik politikası",
     region: "Bölge, o projelerde ayarlanan bölgedir. Bulunduğunuz ülkenin dışına aktarım, onların koşullarında anlatılır. Çizimler herkese açık bir sayfada yayımlanmaz. İç bildirimdeki indirme bağlantıları yedi gün sonra sona erer.",
     cookiesTitle: "Çerezler ve tarayıcıda saklama",

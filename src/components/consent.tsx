@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getCopy } from "@/i18n/copy";
 import { hrefFor, localeFromPath } from "@/i18n/locale";
-import { analyticsEnabled, gtmId } from "@/lib/site";
+import { analyticsEnabled } from "@/lib/site";
 import { secondaryButton } from "@/components/styles";
 
 const STORAGE_KEY = "corivo-consent";
@@ -82,20 +82,16 @@ type DataLayerWindow = Window & {
   gtag?: (...args: unknown[]) => void;
 };
 
-function installGtm() {
-  if (document.querySelector("script[data-corivo-gtm]")) return;
+function applyConsent(value: Consent | null) {
   const target = window as DataLayerWindow;
-  target.dataLayer = target.dataLayer ?? [];
-  target.gtag = function gtag() {
-    target.dataLayer?.push(arguments);
-  };
-  target.gtag("js", new Date());
-  target.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
-  const script = document.createElement("script");
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtm.js?id=${gtmId}`;
-  script.dataset.corivoGtm = "true";
-  document.head.appendChild(script);
+  if (typeof target.gtag !== "function") return;
+  const state = value === "accepted" ? "granted" : "denied";
+  target.gtag("consent", "update", {
+    ad_storage: state,
+    ad_user_data: state,
+    ad_personalization: state,
+    analytics_storage: state,
+  });
 }
 
 export function Analytics() {
@@ -103,8 +99,7 @@ export function Analytics() {
     if (!analyticsEnabled()) return;
 
     function sync() {
-      if (readConsent() !== "accepted") return;
-      installGtm();
+      applyConsent(readConsent());
     }
 
     sync();

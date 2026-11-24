@@ -20,6 +20,7 @@ export default defineConfig({
     entrypoint: "vinext/server/fetch-handler",
     compatibilityDate: "2026-11-22",
     compatibilityFlags: ["nodejs_compat"],
+    domains: ["getcorivo.com", "www.getcorivo.com"],
     assets: {
       htmlHandling: "none",
       notFoundHandling: "none",

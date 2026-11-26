@@ -1,5 +1,8 @@
 import Link from "next/link";
-import { primaryButton, secondaryButton } from "@/components/styles";
+import { primaryButton } from "@/components/styles";
+
+const heroSecondaryButton =
+  "inline-flex min-h-11 items-center justify-center border border-white/55 bg-transparent px-4 text-sm font-semibold text-white transition-colors hover:border-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950";
 
 type HomeHeroProps = {
   brand: string;
@@ -63,10 +66,7 @@ export function HomeHero({
             <Link href={quoteHref} className={`${primaryButton} min-w-[10.5rem]`}>
               {quoteLabel}
             </Link>
-            <Link
-              href={productsHref}
-              className={`${secondaryButton} border-white/35 bg-transparent text-white hover:border-white hover:bg-white/10`}
-            >
+            <Link href={productsHref} className={heroSecondaryButton}>
               {productsLabel}
             </Link>
           </div>

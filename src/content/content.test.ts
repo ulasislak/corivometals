@@ -44,8 +44,9 @@ describe("published copy", () => {
   });
 
   it("uses one audience description and explains cabinet buyers in plain language", () => {
-    expect(siteDescription).toContain("manufacturers in Europe");
-    expect(siteDescription).toContain("Türkiye");
+    expect(siteDescription).toContain("worldwide");
+    expect(siteDescription).not.toContain("Türkiye");
+    expect(siteDescription.toLowerCase()).not.toContain("europe");
     expect(siteDescription.toLowerCase()).not.toContain("panel builder");
     const cabinets = industries.find((item) => item.id === "panel-builders");
     expect(cabinets?.title).toBe("Cabinets and housings");

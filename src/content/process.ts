@@ -12,7 +12,7 @@ export const steps = [
   {
     n: "03",
     title: "Production and inspection",
-    text: "After you accept the quote in writing and pay the advance, the parts are made in Türkiye and checked against the accepted drawing.",
+    text: "After you accept the quote in writing and pay the advance, the parts are made and checked against the accepted drawing. We ship worldwide.",
   },
   {
     n: "04",

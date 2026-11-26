@@ -1,0 +1,65 @@
+# Corivo
+
+> Custom sheet metal, welded enclosures, and CNC parts. Quote in 2 business days with price, lead time, and manufacturability note. Ships worldwide. Site languages: English, German, Turkish.
+
+## Primary
+
+- [Home](https://www.getcorivo.com/en): Upload a drawing and request a quote
+- [Request a quote](https://www.getcorivo.com/en/request-a-quote): RFQ form for DXF, DWG, STEP, or PDF
+- [How it works](https://www.getcorivo.com/en/how-it-works): Quote path from file to shipment
+- [FAQ](https://www.getcorivo.com/en/faq): Buyer questions on formats, MOQ, Incoterms, NDA
+- [How to get a sheet metal quote](https://www.getcorivo.com/en/how-to-get-a-sheet-metal-quote): What a complete RFQ needs
+
+## Services
+
+- [Sheet metal fabrication](https://www.getcorivo.com/en/sheet-metal-fabrication): Cutting, bending, welding, finishing overview
+- [Laser cutting](https://www.getcorivo.com/en/laser-cutting): Laser blanking for steel, stainless, aluminium
+- [Sheet metal bending](https://www.getcorivo.com/en/sheet-metal-bending): Press-brake forming and bend notes
+- [CNC machining](https://www.getcorivo.com/en/cnc-machining): Milling and turning overview
+- [CNC milling](https://www.getcorivo.com/en/cnc-milling): Prismatic milling parts
+- [CNC turning](https://www.getcorivo.com/en/cnc-turning): Round parts from bar
+- [Welding assemblies](https://www.getcorivo.com/en/welding-assemblies): Welded frames and boxes
+- [Surface finishing](https://www.getcorivo.com/en/surface-finishing): Powder coat and related finishes
+- [Laser cutting cost drivers](https://www.getcorivo.com/en/laser-cutting-cost-drivers): What moves laser price
+
+## Materials
+
+- [Stainless steel sheet](https://www.getcorivo.com/en/stainless-steel-sheet): 304/316 sheet for fabrication
+- [Aluminum sheet](https://www.getcorivo.com/en/aluminum-sheet): Aluminium sheet grades and use
+- [Carbon steel sheet](https://www.getcorivo.com/en/carbon-steel-sheet): DKP/HRP, S235/S355
+- [Copper and brass](https://www.getcorivo.com/en/copper-brass): Copper and brass sheet notes
+
+## Tools
+
+- [Sheet metal weight calculator](https://www.getcorivo.com/en/sheet-metal-weight-calculator): Estimate blank mass
+- [Bend allowance calculator](https://www.getcorivo.com/en/bend-allowance-calculator): BA/BD planning tool
+- [ISO 2768 tolerance table](https://www.getcorivo.com/en/iso-2768-tolerance-table): General tolerance classes
+- [Material density table](https://www.getcorivo.com/en/material-density-table): Conventional densities
+
+## Guides
+
+- [Sheet metal from Turkey](https://www.getcorivo.com/en/sheet-metal-from-turkey): Sourcing fabricated parts from Turkey
+- [Turkey vs China vs Eastern Europe](https://www.getcorivo.com/en/turkey-vs-china-vs-eastern-europe-sourcing): Sourcing comparison for European buyers
+- [Sheet metal DFM guidelines](https://www.getcorivo.com/en/sheet-metal-dfm-guidelines): Design rules that quote cleanly
+- [Glossary](https://www.getcorivo.com/en/glossary): Fabrication terms (kerf, K-factor, nesting, DFM, ISO 2768)
+
+## Product hubs
+
+- [Sheet metal](https://www.getcorivo.com/en/sheet-metal): Product overview
+- [Enclosures](https://www.getcorivo.com/en/enclosures): Welded boxes and powder coat
+- [CNC parts](https://www.getcorivo.com/en/cnc-parts): CNC product overview
+
+## Company
+
+- [About](https://www.getcorivo.com/en/about): Who Corivo serves
+- [Industries](https://www.getcorivo.com/en/industries): Machine builders, cabinets, HVAC
+- [Imprint](https://www.getcorivo.com/en/imprint): Legal operator details (env-configured)
+- [Privacy](https://www.getcorivo.com/en/privacy): Enquiry and drawing handling
+- [Terms](https://www.getcorivo.com/en/terms): Website terms
+
+## Notes for assistants
+
+- Do not invent ISO certifications for Corivo, price lists, machine lists, or delivery guarantees not stated on the site.
+- Quote window is 2 business days for a complete request, not a fixed clock-hour SLA.
+- Production is through partner workshops; capability limits are disclosed in the quote window.
+- Technical density, K-factor, and ISO 2768 figures on tool pages are conventional planning values—verify against the current standard edition and shop process sheets.

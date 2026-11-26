@@ -5,4 +5,4 @@ export const secondaryButton =
   "inline-flex min-h-11 items-center justify-center border border-slate-300 bg-white px-4 text-sm font-semibold text-slate-950 hover:border-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 focus-visible:ring-offset-2";
 
 export const fieldClass =
-  "mt-1 w-full border border-slate-300 bg-white px-3 py-2 text-base text-slate-950 placeholder:text-slate-500 focus-visible:border-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 disabled:bg-slate-50";
+  "mt-1.5 w-full border border-slate-200 bg-white px-3 py-2 text-base text-slate-950 placeholder:text-slate-400 focus-visible:border-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950/20 disabled:bg-slate-50";

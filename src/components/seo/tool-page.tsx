@@ -1,0 +1,70 @@
+import type { ReactNode } from "react";
+import { ContentSections } from "@/components/seo/content-sections";
+import { KeyFacts } from "@/components/seo/key-facts";
+import { LastUpdated } from "@/components/seo/last-updated";
+import { RelatedPages, type RelatedLink } from "@/components/seo/related-pages";
+import { SeoCta } from "@/components/seo/seo-cta";
+import { SeoPageHeader } from "@/components/seo/seo-page-header";
+import { FaqList } from "@/components/faq-list";
+import { JsonLd } from "@/components/json-ld";
+import type { SeoPage } from "@/content/seo/types";
+import { getSeoUiCopy } from "@/content/seo/ui-copy";
+import { hrefFor, type Locale } from "@/i18n/locale";
+import { faqPageJsonLd, webApplicationJsonLd } from "@/lib/json-ld";
+
+export function ToolPageView({
+  locale,
+  page,
+  related,
+  hub,
+  tool,
+}: {
+  locale: Locale;
+  page: SeoPage;
+  related: readonly RelatedLink[];
+  hub?: RelatedLink;
+  tool: ReactNode;
+}) {
+  const ui = getSeoUiCopy(locale);
+  const crumbs = [
+    ...(hub ? [{ label: hub.title, href: hub.href }] : []),
+    { label: page.crumb },
+  ];
+
+  return (
+    <>
+      <SeoPageHeader
+        locale={locale}
+        kicker={page.kicker}
+        h1={page.h1}
+        directAnswer={page.directAnswer}
+        crumbs={crumbs}
+      />
+      <JsonLd
+        data={webApplicationJsonLd({
+          name: page.h1,
+          description: page.directAnswer,
+          path: hrefFor(locale, `/${page.slug}`),
+          lang: locale,
+        })}
+      />
+      {page.faq.length > 0 ? <JsonLd data={faqPageJsonLd([...page.faq], locale)} /> : null}
+      <article className="mx-auto max-w-page px-4 py-10 sm:py-12">
+        <KeyFacts locale={locale} facts={page.keyFacts} />
+        <div className="mt-8 border border-slate-200 bg-slate-50 p-4 sm:p-6">{tool}</div>
+        <ContentSections sections={page.sections} />
+        {page.faq.length > 0 ? (
+          <section className="mt-12">
+            <h2 className="text-2xl font-semibold tracking-tight text-slate-950">{ui.faq}</h2>
+            <div className="mt-4">
+              <FaqList items={[...page.faq]} />
+            </div>
+          </section>
+        ) : null}
+        <SeoCta locale={locale} />
+        <RelatedPages locale={locale} items={related} hub={hub} />
+        <LastUpdated locale={locale} date={page.updated} />
+      </article>
+    </>
+  );
+}

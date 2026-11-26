@@ -1,7 +1,9 @@
+import { seoSitemapPaths } from "@/content/seo/registry";
+
 export const siteName = "Corivo";
 
 export const siteDescription =
-  "Custom sheet metal parts, enclosures, and CNC parts made in Türkiye for manufacturers in Europe. Quote in 2 business days, with a price, a lead time, and a manufacturability note.";
+  "Custom sheet metal parts, enclosures, and CNC parts. Quote in 2 business days, with a price, a lead time, and a manufacturability note. We ship worldwide.";
 
 function trimTrailingSlash(value: string): string {
   return value.replace(/\/+$/, "");
@@ -40,7 +42,7 @@ export const policyUpdated = "24 November 2026";
 
 export const quoteWindow = "2 business days";
 
-export const routes = [
+const coreRoutes = [
   { path: "/", changeFrequency: "weekly" as const, priority: 1 },
   { path: "/sheet-metal", changeFrequency: "monthly" as const, priority: 0.9 },
   { path: "/enclosures", changeFrequency: "monthly" as const, priority: 0.9 },
@@ -50,6 +52,9 @@ export const routes = [
   { path: "/faq", changeFrequency: "monthly" as const, priority: 0.7 },
   { path: "/about", changeFrequency: "monthly" as const, priority: 0.6 },
   { path: "/request-a-quote", changeFrequency: "monthly" as const, priority: 0.9 },
+  { path: "/imprint", changeFrequency: "yearly" as const, priority: 0.2 },
   { path: "/privacy", changeFrequency: "yearly" as const, priority: 0.3 },
   { path: "/terms", changeFrequency: "yearly" as const, priority: 0.3 },
 ];
+
+export const routes = [...coreRoutes, ...seoSitemapPaths];

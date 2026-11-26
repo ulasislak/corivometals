@@ -50,7 +50,11 @@ export type Copy = {
     productsKicker: string;
     productsTitle: string;
     productsText: string;
-    families: Array<{ title: string; text: string; href: string; link: string; table: "tolerance" | "finish" | "cnc" }>;
+    families: Array<{ title: string; text: string; href: string; link: string; table: "tolerance" | "finish" | "cnc"; imageAlt: string }>;
+    cuttingAlt: string;
+    photoNote: string;
+    heroQuote: string;
+    heroProducts: string;
     whyKicker: string;
     whyTitle: string;
     faqKicker: string;
@@ -218,6 +222,12 @@ export type Copy = {
     deliveryHint: string;
     flexible: string;
     optional: string;
+    optionalDetails: string;
+    stepPart: string;
+    stepSpecs: string;
+    stepContact: string;
+    continue: string;
+    back: string;
     submit: string;
     sending: string;
     privacyBefore: string;
@@ -282,8 +292,8 @@ const countriesTr: Record<string, string> = {
 
 const en: Copy = {
   description:
-    "Custom sheet metal, welded enclosures, and CNC parts made in Türkiye for manufacturers in Europe. Upload a drawing. Quote in 2 business days, with a price, a lead time, and a manufacturability note.",
-  ogTitle: "Corivo — Sheet metal parts and enclosures from Türkiye",
+    "Custom sheet metal, welded enclosures, and CNC parts. Upload a drawing. Quote in 2 business days, with a price, a lead time, and a manufacturability note. We ship worldwide.",
+  ogTitle: "Corivo — Sheet metal parts and enclosures",
   date: "21 November 2026",
   notPublished: "Not published yet",
   chrome: {
@@ -318,6 +328,7 @@ const en: Copy = {
     legal: [
       { href: "/privacy", label: "Privacy" },
       { href: "/terms", label: "Terms" },
+      { href: "/imprint", label: "Imprint" },
     ],
     footerNote: "Quote within 2 business days. Prices are written on the quote, not listed here.",
     language: "Language",
@@ -330,9 +341,9 @@ const en: Copy = {
   home: {
     title: "Custom sheet metal parts and enclosures",
     eyebrow: "SHEET METAL · ENCLOSURES · CNC",
-    h1: "Custom sheet metal parts. Upload a drawing. Quote in 2 business days.",
-    lede: "Laser cutting, bending, welded enclosures, and CNC parts, made in Türkiye for manufacturers in Europe. Prototypes and repeat batches. Send DXF, DWG, STEP, or PDF.",
-    trust: "Quote in 2 business days. Manufacturability note with every quote. Dimensional report and photos with each shipment.",
+    h1: "Upload a drawing. Quote in 2 business days.",
+    lede: "Laser cutting, bending, welded enclosures, and CNC parts. Send DXF, DWG, STEP, or PDF. We ship worldwide.",
+    trust: "Quote in 2 business days. Manufacturability note with every quote. We ship worldwide.",
     processKicker: "01",
     processTitle: "From file to finished part",
     processText: "Upload the drawing. The quote comes within 2 business days. Production lead time is written on the quote, not inside those 2 business days.",
@@ -347,6 +358,7 @@ const en: Copy = {
         href: "/sheet-metal",
         link: "Laser cutting and bending",
         table: "tolerance",
+        imageAlt: "Laser cutting sheet metal",
       },
       {
         title: "Enclosures and welded assemblies",
@@ -354,6 +366,7 @@ const en: Copy = {
         href: "/enclosures",
         link: "Enclosures and powder coating",
         table: "finish",
+        imageAlt: "Powder coating a metal assembly in a finishing booth",
       },
       {
         title: "CNC machining",
@@ -361,8 +374,13 @@ const en: Copy = {
         href: "/cnc-parts",
         link: "CNC machining",
         table: "cnc",
+        imageAlt: "CNC milling a metal block",
       },
     ],
+    cuttingAlt: "Machined metal parts",
+    photoNote: "Example photographs. These are not parts from a Corivo order.",
+    heroQuote: "Request a quote",
+    heroProducts: "What we manufacture",
     whyKicker: "03",
     whyTitle: "One drawing, one quote, one contact",
     faqKicker: "04",
@@ -379,7 +397,7 @@ const en: Copy = {
   steps: [
     { n: "01", title: "Upload drawing", text: "Send DXF, DWG, STEP, or PDF, or describe the part in the notes. Add the material, the quantity for this order, and the estimated annual quantity." },
     { n: "02", title: "Quote with manufacturability note", text: "Within 2 business days you receive a price, a lead time, and a note on anything in the drawing we need confirmed before cutting, bending, or welding." },
-    { n: "03", title: "Production and inspection", text: "After you accept the quote in writing and pay the advance, the parts are made in Türkiye and checked against the accepted drawing." },
+    { n: "03", title: "Production and inspection", text: "After you accept the quote in writing and pay the advance, the parts are made and checked against the accepted drawing. We ship worldwide." },
     { n: "04", title: "Delivery", text: "Each shipment includes a dimensional report and photos. Delivery is EXW, FCA, or DAP, as written on the quote. The balance is due before dispatch." },
   ],
   reasons: [
@@ -390,7 +408,7 @@ const en: Copy = {
   quoteContents: ["Price and currency", "Production lead time", "Incoterm and the named place", "Advance and balance amounts", "Manufacturability note", "Quote reference", "The date the quote is valid until"],
   how: {
     title: "How it works",
-    description: "Upload a drawing, receive a quote and a manufacturability note within 2 business days, then production in Türkiye, inspection, and delivery under EXW, FCA, or DAP.",
+    description: "Upload a drawing, receive a quote and a manufacturability note within 2 business days, then production, inspection, and worldwide delivery under EXW, FCA, or DAP.",
     kicker: "PROCESS",
     heading: "How a Corivo order works",
     lede: "One contact, one quote reference, and a written note on manufacturability before any metal is cut. Payment is an advance, then the balance before dispatch. This website does not take payment.",
@@ -398,7 +416,7 @@ const en: Copy = {
     detail: [
       "Use DXF, DWG, STEP, or PDF, or describe the part if the drawing is not ready. Include material, the quantity for this batch, and the estimated annual quantity. Thickness and a delivery date help when you know them. If you need an NDA before the production file, attach a one-page PDF that says so.",
       "The reply has a price, a production lead time, an Incoterm, and a manufacturability note. The note is where we flag a bend that is too tight, a missing weld, or a coating that was not specified. It is not a redesign. You accept the quote, including that note, in writing.",
-      "Production starts after written acceptance and the advance. Parts are made in Türkiye and checked against the accepted drawing. Those 2 business days do not apply to this step. The lead time on the quote does.",
+      "Production starts after written acceptance and the advance. Parts are made and checked against the accepted drawing. Those 2 business days do not apply to this step. The lead time on the quote does. We ship worldwide.",
       "You receive the parts, a dimensional report, and photos. A material certificate is included when the order asked for it. The balance is due before dispatch. EXW, FCA, or DAP is whichever term is printed on the quote.",
     ],
     contains: "What the quote contains",
@@ -406,28 +424,28 @@ const en: Copy = {
   },
   faq: {
     title: "FAQ",
-    description: "What Corivo supplies, who the parts are for, where they are made, file formats, minimum order, 2-business-day quotes, EXW, FCA, DAP, payment, NDAs, and remakes.",
+    description: "What Corivo supplies, who the parts are for, worldwide shipping, file formats, minimum order, 2-business-day quotes, EXW, FCA, DAP, payment, NDAs, and remakes.",
     kicker: "FAQ",
     heading: "Frequently asked questions",
-    lede: "What Corivo supplies, who the parts are for, where they are made, then formats, quantity, time, delivery terms, payment, confidentiality, and non-conforming parts.",
+    lede: "What Corivo supplies, who the parts are for, and where we ship, then formats, quantity, time, delivery terms, payment, confidentiality, and non-conforming parts.",
     crumb: "FAQ",
     items: [],
   },
   industries: {
     title: "Industries",
-    description: "Custom sheet metal, enclosures, and CNC parts made in Türkiye for manufacturers in Europe, including machine and equipment makers, cabinet and housing builders, and HVAC companies.",
+    description: "Custom sheet metal, enclosures, and CNC parts for machine and equipment makers, cabinet and housing builders, and HVAC companies. We ship worldwide.",
     kicker: "INDUSTRIES",
     heading: "Who the parts are for",
-    lede: "Manufacturers in Europe buying custom parts made in Türkiye. The groups below are common uses, not a closed list. The quote path is the same: a drawing or a description, the annual quantity, and a reply within 2 business days.",
+    lede: "The groups below are common uses, not a closed list, and there is no country limit. The quote path is the same: a drawing or a description, the annual quantity, and a reply within 2 business days.",
     crumb: "Industries",
     items: [],
   },
   about: {
     title: "About",
-    description: "Corivo is a sourcing partner for custom sheet metal parts, enclosures, and CNC parts made in Türkiye and supplied to manufacturers in Europe.",
+    description: "Corivo is a sourcing partner for custom sheet metal parts, enclosures, and CNC parts. We ship worldwide.",
     kicker: "ABOUT",
     heading: "About Corivo",
-    lede: "Corivo is a sourcing partner for custom sheet metal parts, enclosures, and CNC parts made in Türkiye. The buyers are manufacturers in Europe, including machine and equipment makers, companies that need metal cabinets or housings, and HVAC companies.",
+    lede: "Corivo is a sourcing partner for custom sheet metal parts, enclosures, and CNC parts. Buyers include machine and equipment makers, companies that need metal cabinets or housings, and HVAC companies. There is no country limit.",
     crumb: "About",
     paragraphs: [
       "You work with a single contact from the first drawing through later batches. This website is in English, German, and Turkish.",
@@ -462,7 +480,7 @@ const en: Copy = {
   },
   enclosures: {
     title: "Enclosures and welded assemblies",
-    description: "Welded enclosures, frames, and cabinets made in Türkiye, with powder coating when you specify the colour. Every shipment includes a dimensional report and photos.",
+    description: "Welded enclosures, frames, and cabinets, with powder coating when you specify the colour. Every shipment includes a dimensional report and photos. We ship worldwide.",
     kicker: "ENCLOSURES",
     heading: "Enclosures and welded assemblies",
     lede: "Welded boxes, frames, machine cabinets, and equipment housings. Powder coating is part of the quote when you specify the colour and the faces that must stay free of paint.",
@@ -493,7 +511,7 @@ const en: Copy = {
   },
   cnc: {
     title: "CNC machining",
-    description: "Milled and turned parts made in Türkiye. Send STEP and a PDF. Threads, fits, and the surfaces that matter are confirmed in the manufacturability note.",
+    description: "Milled and turned parts. Send STEP and a PDF. Threads, fits, and the surfaces that matter are confirmed in the manufacturability note. We ship worldwide.",
     kicker: "CNC",
     heading: "CNC machining",
     lede: "Milling and turning, from one prototype to a repeat batch. Send STEP and a PDF. The manufacturability note confirms what we see on the drawing before you accept the quote.",
@@ -548,7 +566,7 @@ const en: Copy = {
     lede: "Identity of the operator of this website. A line that says “Not published yet” has not been set in the site configuration. It is not a placeholder address.",
     crumb: "Imprint",
     labels: ["Legal name", "Address", "Postal code", "City", "Country", "Register", "VAT", "Represented by", "Email", "Phone"],
-    closing: "Corivo supplies custom sheet metal parts, enclosures, and CNC parts made in Türkiye to manufacturers in Europe. This website is available in English, German, and Turkish.",
+    closing: "Corivo supplies custom sheet metal parts, enclosures, and CNC parts, and ships worldwide. This website is available in English, German, and Turkish.",
   },
   privacy: {
     title: "Privacy",
@@ -604,7 +622,7 @@ const en: Copy = {
     crumb: "Terms",
     updated: "Last updated",
     sections: [
-      { title: "The website", body: "The site describes how to request a quote for sheet metal parts, enclosures, and CNC parts made in Türkiye. It does not list prices, and it does not take payment. Sending a form is a request for a quote, not an order." },
+      { title: "The website", body: "The site describes how to request a quote for sheet metal parts, enclosures, and CNC parts. It does not list prices, and it does not take payment. Sending a form is a request for a quote, not an order." },
       { title: "Quotes", body: "A complete request includes a drawing or a description of the part, a work email, material, quantity, estimated annual quantity, name, and company. Thickness and delivery date are optional. We reply within 2 business days of a complete request. When a drawing is attached and we cannot read it, the 2 business days start when the drawing can be read. The reply includes a price, a production lead time, and a manufacturability note. The date the quote stays open is printed on the quote." },
       { title: "Your drawing", body: "You are responsible for the drawing, the grade, and the dimensions you send. Tell us if a file is superseded. We use the files to quote and, if you order, to make the parts. We do not publish them. An NDA is available on request before you send production files." },
       { title: "Manufacturability note", body: "The note flags what we see: a bend, a weld, a missing dimension, or a coating. It is not a full design review and it does not move design responsibility to us. Production of an exception starts only after you accept the quote, including the note, in writing." },
@@ -693,41 +711,47 @@ const en: Copy = {
   form: {
     title: "Request a quote",
     window: "2 DAYS",
-    intro: "We reply within 2 business days of a complete request. The reply includes a price, a lead time, and a manufacturability note.",
-    requiredNote: "A drawing or a description of the part is required. Other required fields are marked.",
+    intro: "Price, lead time, and a manufacturability note within 2 business days.",
+    requiredNote: "A drawing or a short part description is required.",
     honeypot: "Leave this field empty",
     drawings: "Drawings",
-    drawingsHint: "DXF, DWG, STEP, or PDF. Up to 8 files, 20 MB each. Required unless the notes describe the part. Need an NDA first? Attach a one-page PDF that says so.",
+    drawingsHint: "DXF, DWG, STEP, or PDF · up to 8 files, 20 MB each",
     choose: "Choose files",
-    drop: "Or drop files here.",
+    drop: "Or drop files here",
     remove: "Remove",
     notes: "Notes",
-    notesHint: "Required if you are not attaching a drawing. Describe the part, or add powder coat RAL, hardware, weld notes, or an NDA request.",
+    notesHint: "Describe the part if you have no drawing. Add RAL, hardware, weld notes, or an NDA request here.",
     email: "Work email",
     material: "Material",
-    materialHint: "If the part uses more than one grade, pick the main one and list the others in notes.",
+    materialHint: "Main grade; list others in notes.",
     materialPlaceholder: "Select a material",
     quantity: "Quantity (this order)",
     quantityHint: "Pieces in this batch.",
-    annual: "Estimated annual quantity (pieces)",
-    annualHint: "Pieces you expect over twelve months, including later batches.",
+    annual: "Estimated annual quantity",
+    annualHint: "Expected pieces over twelve months.",
     annualUnknown: "I don't know yet",
     name: "Name",
-    nameHint: "The person we should reply to.",
+    nameHint: "Who should receive the reply.",
     company: "Company",
     country: "Country",
     countryPlaceholder: "Select a country",
     countryFocus: "Focus",
     countryOther: "Other",
     thickness: "Thickness (mm)",
-    thicknessHint: "Example: 2.0. Leave blank if the drawing states it, or you do not know it yet.",
+    thicknessHint: "Leave blank if the drawing states it.",
     delivery: "Delivery date",
-    deliveryHint: "The date you want the parts. Lead time is confirmed on the quote.",
+    deliveryHint: "Lead time is confirmed on the quote.",
     flexible: "Flexible",
     optional: "optional",
+    optionalDetails: "Optional details",
+    stepPart: "Part",
+    stepSpecs: "Specs",
+    stepContact: "Contact",
+    continue: "Continue",
+    back: "Back",
     submit: "Request a quote",
     sending: "Sending…",
-    privacyBefore: "Drawings are stored in a private file store and used to prepare the quote.",
+    privacyBefore: "Drawings stay in a private file store and are used to prepare the quote.",
     noscript: "This form uploads drawings from the browser and needs JavaScript.",
     noscriptEmail: "If JavaScript is unavailable, email",
     checking: "Checking the request.",
@@ -751,9 +775,9 @@ const en: Copy = {
 };
 
 en.faq.items = [
-  { question: "What does Corivo supply?", answer: "Corivo supplies custom sheet metal parts, welded enclosures, and CNC parts made in Türkiye. A complete request receives a quote within 2 business days. The quote includes a price, a production lead time, and a manufacturability note." },
-  { question: "Who are the parts for?", answer: "Manufacturers in Europe. Typical buyers are machine and equipment makers, companies that need metal cabinets or housings, and HVAC equipment builders. The same quote path is used for each. A buyer outside those groups can send a drawing too." },
-  { question: "Where are the parts made?", answer: "The parts are made in Türkiye and supplied to buyers in Europe. Delivery is EXW, FCA, or DAP, whichever Incoterm is printed on the quote." },
+  { question: "What does Corivo supply?", answer: "Corivo supplies custom sheet metal parts, welded enclosures, and CNC parts. A complete request receives a quote within 2 business days. The quote includes a price, a production lead time, and a manufacturability note. We ship worldwide." },
+  { question: "Who are the parts for?", answer: "Manufacturers. Typical buyers are machine and equipment makers, companies that need metal cabinets or housings, and HVAC equipment builders. The same quote path is used for each. There is no country limit." },
+  { question: "Where do you ship?", answer: "We ship worldwide. Delivery is EXW, FCA, or DAP, whichever Incoterm is printed on the quote." },
   { question: "Which file formats do you accept?", answer: "We accept DXF, DWG, STEP (including .stp), and PDF. You can attach up to 8 files, and each file can be up to 20 MB. A DXF or STEP file is more reliable than a PDF alone. If you need an NDA before the production drawing is sent, attach a one-page PDF that says so and write it in the notes. We will send an NDA." },
   { question: "What is the minimum order quantity?", answer: "We do not publish one minimum for every part. The quote states the quantity we can make and whether a smaller or larger batch changes the price. Include the estimated annual quantity so the price can reflect repeat production, not only the first batch." },
   { question: "How long does a quote take, and how long does production take?", answer: "You receive a quote within 2 business days of a complete request: a drawing or a description of the part, a work email, material, quantity, estimated annual quantity, name, and company. Thickness and delivery date are optional. If we cannot read a file, we ask for another copy, and the 2 business days start when the drawing can be read. Production lead time is separate. It is written on the quote and depends on material, quantity, finishing, and the agreed Incoterm." },
@@ -766,14 +790,14 @@ en.faq.items = [
 ];
 
 en.industries.items = [
-  { id: "machine-builders", title: "Machine and equipment makers", lede: "Guards, frames, covers, and welded bases for machines and industrial equipment built in Europe.", parts: ["Sheet-metal guards and covers", "Machine frames and welded bases", "Brackets and mounting plates", "Cabinets that bolt to a machine"], send: "Send the part drawings you want made, and the assembly only if it explains welds, hinges, or fit-up. Name the grade and the annual quantity.", href: "/sheet-metal", linkLabel: "Sheet metal" },
+  { id: "machine-builders", title: "Machine and equipment makers", lede: "Guards, frames, covers, and welded bases for machines and industrial equipment.", parts: ["Sheet-metal guards and covers", "Machine frames and welded bases", "Brackets and mounting plates", "Cabinets that bolt to a machine"], send: "Send the part drawings you want made, and the assembly only if it explains welds, hinges, or fit-up. Name the grade and the annual quantity.", href: "/sheet-metal", linkLabel: "Sheet metal" },
   { id: "panel-builders", title: "Cabinets and housings", lede: "Metal cabinets, control housings, doors, and mounting plates. In the electrical trade this buyer is often called a panel builder. Corivo supplies the metal enclosure, not the wiring inside it.", parts: ["Welded boxes and cabinets", "Doors and mounting plates", "Gland plates and DXF cut-outs", "Powder-coated housings"], send: "Put the cut-outs in the DXF. If the box is painted, give the RAL and say which faces or threads must stay bare. A STEP file helps when the box is welded.", href: "/enclosures", linkLabel: "Enclosures" },
   { id: "hvac", title: "HVAC equipment", lede: "Housings, duct parts, access panels, and brackets for heating, ventilation, and air-handling equipment, in galvanized steel, stainless, or aluminium.", parts: ["Equipment housings", "Duct sections and transitions", "Access panels", "Galvanized or stainless brackets"], send: "State the environment if it changes the grade. Name the coating on galvanized sheet if a particular class is required.", href: "/sheet-metal", linkLabel: "Sheet metal" },
 ];
 
 function turkish(): Copy {
   const copy: Copy = structuredClone(en);
-  copy.description = "Türkiye’deki üreticiler için özel sac, kaynaklı muhafaza ve CNC. Çizimi yükleyin. 2 iş günü içinde fiyat, termin ve üretilebilirlik notu.";
+  copy.description = "Özel sac, kaynaklı muhafaza ve CNC. Çizimi yükleyin. 2 iş günü içinde fiyat, termin ve üretilebilirlik notu. Dünyanın her yerine gönderim.";
   copy.ogTitle = "Corivo — Özel sac parçalar ve muhafazalar";
   copy.date = "21 Kasım 2026";
   copy.notPublished = "Henüz yayımlanmadı";
@@ -808,6 +832,7 @@ function turkish(): Copy {
   copy.chrome.legal = [
     { href: "/privacy", label: "Gizlilik" },
     { href: "/terms", label: "Koşullar" },
+    { href: "/imprint", label: "Künye" },
   ];
   copy.chrome.footerNote = "Teklif 2 iş günü içinde. Fiyatlar burada değil, teklifte yazılır.";
   copy.chrome.language = "Dil";
@@ -820,18 +845,22 @@ function turkish(): Copy {
     ...copy.home,
     title: "Özel sac parçalar ve muhafazalar",
     eyebrow: "SAC · MUHAFAZA · CNC",
-    h1: "Özel sac parçalar, Türkiye’de. Çizimi yükle. Teklif 2 iş gününde.",
-    lede: "Lazer kesim, büküm, kaynaklı muhafaza ve CNC. Prototipten tekrarlı üretime. DXF, DWG, STEP veya PDF gönderin. Türkiye’deki makine, ekipman, dolap ve HVAC üreticileri için.",
-    trust: "Teklif 2 iş gününde. Her teklifte üretilebilirlik notu. Her sevkiyatta ölçü raporu ve fotoğraflar.",
+    h1: "Çizimi yükle. Teklif 2 iş gününde.",
+    lede: "Lazer kesim, büküm, kaynaklı muhafaza ve CNC. DXF, DWG, STEP veya PDF gönderin. Gönderimde ülke sınırı yok.",
+    trust: "Teklif 2 iş gününde. Her teklifte üretilebilirlik notu. Gönderimde ülke sınırı yok.",
     processTitle: "Dosyadan parçaya",
     processText: "Çizimi yükleyin. Teklif 2 iş günü içinde gelir. Üretim termini o 2 iş gününün içinde değil, teklifte yazılır.",
     productsTitle: "Ne üretiyoruz",
     productsText: "Sac, kaynaklı montaj ve onlarla birlikte giden CNC parçalar. Kalite, yüzey ve tolerans çiziminizden gelir ve teklifte doğrulanır.",
     families: [
-      { title: "Sac", text: "Lazerle kesilmiş açınımlar ve abkant parçaları: kapak, braket, takviye ve şasi. Kalınlık ve büküm yönü çizimden gelir.", href: "/sheet-metal", link: "Lazer kesim ve büküm", table: "tolerance" },
-      { title: "Muhafazalar ve kaynaklı montajlar", text: "Kaynaklı kutu, çerçeve, koruyucu ve dolap. Toz boya gerekiyorsa RAL’i ve boyasız kalacak yüzeyleri yazın.", href: "/enclosures", link: "Muhafazalar ve toz boya", table: "finish" },
-      { title: "CNC işleme", text: "Tek prototipten tekrarlı partiye freze ve torna. Diş, geçme ve önemli yüzeyler çizimde olsun.", href: "/cnc-parts", link: "CNC işleme", table: "cnc" },
+      { title: "Sac", text: "Lazerle kesilmiş açınımlar ve abkant parçaları: kapak, braket, takviye ve şasi. Kalınlık ve büküm yönü çizimden gelir.", href: "/sheet-metal", link: "Lazer kesim ve büküm", table: "tolerance", imageAlt: "Sac lazer kesimi" },
+      { title: "Muhafazalar ve kaynaklı montajlar", text: "Kaynaklı kutu, çerçeve, koruyucu ve dolap. Toz boya gerekiyorsa RAL’i ve boyasız kalacak yüzeyleri yazın.", href: "/enclosures", link: "Muhafazalar ve toz boya", table: "finish", imageAlt: "Metal montajın toz boya kabininde kaplanması" },
+      { title: "CNC işleme", text: "Tek prototipten tekrarlı partiye freze ve torna. Diş, geçme ve önemli yüzeyler çizimde olsun.", href: "/cnc-parts", link: "CNC işleme", table: "cnc", imageAlt: "Metal bloğu frezeleyen CNC" },
     ],
+    cuttingAlt: "İşlenmiş metal parçalar",
+    photoNote: "Örnek fotoğraflar. Bunlar bir Corivo siparişinin parçaları değildir.",
+    heroQuote: "Teklif iste",
+    heroProducts: "Ne üretiyoruz",
     whyTitle: "Tek çizim, tek teklif, tek kişi",
     faqTitle: "Yüklemeden önce",
     faqLink: "SSS sayfasını aç",
@@ -846,7 +875,7 @@ function turkish(): Copy {
   copy.steps = [
     { n: "01", title: "Çizimi yükle", text: "DXF, DWG, STEP veya PDF gönderin ya da parçayı notlarda tarif edin. Malzemeyi, bu siparişin adedini ve tahmini yıllık adedi ekleyin." },
     { n: "02", title: "Üretilebilirlik notlu teklif", text: "2 iş günü içinde fiyat, termin ve kesim, büküm veya kaynaktan önce doğrulamamız gereken noktaların notunu alırsınız." },
-    { n: "03", title: "Üretim ve kontrol", text: "Teklifi yazılı kabul edip avansı ödedikten sonra parçalar Türkiye’de üretilir ve kabul edilen çizime göre kontrol edilir." },
+    { n: "03", title: "Üretim ve kontrol", text: "Teklifi yazılı kabul edip avansı ödedikten sonra parçalar üretilir ve kabul edilen çizime göre kontrol edilir. Gönderimde ülke sınırı yoktur." },
     { n: "04", title: "Teslimat", text: "Her sevkiyatta ölçü raporu ve fotoğraflar vardır. Teslimat, teklifte yazıldığı gibi EXW, FCA veya DAP’tır. Bakiye sevkiyattan önce ödenir." },
   ];
   copy.reasons = [
@@ -857,7 +886,7 @@ function turkish(): Copy {
   copy.quoteContents = ["Fiyat ve para birimi", "Üretim termini", "Incoterm ve adlandırılan yer", "Avans ve bakiye tutarları", "Üretilebilirlik notu", "Teklif referansı", "Teklifin geçerli olduğu son tarih"];
   copy.how = {
     title: "Nasıl çalışır",
-    description: "Çizim yükleyin, 2 iş günü içinde teklif ve üretilebilirlik notu alın. Ardından Türkiye’de üretim, kontrol ve EXW, FCA veya DAP teslimat.",
+    description: "Çizim yükleyin, 2 iş günü içinde teklif ve üretilebilirlik notu alın. Ardından üretim, kontrol ve EXW, FCA veya DAP ile dünyanın her yerine gönderim.",
     kicker: "SÜREÇ",
     heading: "Bir Corivo siparişi nasıl işler",
     lede: "Tek kişi, tek teklif referansı ve metal kesilmeden önce yazılı üretilebilirlik notu. Ödeme önce avans, sevkiyattan önce bakiyedir. Bu site ödeme almaz.",
@@ -865,7 +894,7 @@ function turkish(): Copy {
     detail: [
       "DXF, DWG, STEP veya PDF kullanın. Çizim hazır değilse parçayı tarif edin. Malzemeyi, bu partinin adedini ve tahmini yıllık adedi yazın. Kalınlık ve teslim tarihi biliyorsanız ekleyin. Üretim dosyasından önce NDA istiyorsanız bunu söyleyen tek sayfalık bir PDF ekleyin.",
       "Yanıtta fiyat, üretim termini, Incoterm ve üretilebilirlik notu vardır. Not, çok sıkı bir bükümü, eksik bir kaynağı veya belirtilmemiş bir kaplamayı işaret eder. Yeniden tasarım değildir. Teklifi, not dahil, yazılı kabul edersiniz.",
-      "Üretim, yazılı kabul ve avanstan sonra başlar. Parçalar Türkiye’de üretilir ve kabul edilen çizime göre kontrol edilir. 2 iş günü bu adıma uygulanmaz. Teklifteki termin uygulanır.",
+      "Üretim, yazılı kabul ve avanstan sonra başlar. Parçalar üretilir ve kabul edilen çizime göre kontrol edilir. 2 iş günü bu adıma uygulanmaz. Teklifteki termin uygulanır. Gönderimde ülke sınırı yoktur.",
       "Parçaları, ölçü raporunu ve fotoğrafları alırsınız. Sipariş istediysa malzeme sertifikası da gelir. Bakiye sevkiyattan önce ödenir. EXW, FCA veya DAP, teklifte yazılı olan terimdir.",
     ],
     contains: "Teklifte neler vardır",
@@ -879,9 +908,9 @@ function turkish(): Copy {
     lede: "Corivo’nun ne tedarik ettiği, parçaların kimler için olduğu, nerede üretildiği; ardından biçimler, adet, süre, teslim koşulları, ödeme, gizlilik ve çizime uymayan parçalar.",
     crumb: "SSS",
     items: [
-      { question: "Corivo ne tedarik eder?", answer: "Corivo, Türkiye’de üretilen özel sac parçalar, kaynaklı muhafazalar ve CNC parçalar tedarik eder. Eksiksiz bir talep 2 iş günü içinde teklif alır. Teklifte fiyat, üretim termini ve üretilebilirlik notu vardır." },
-      { question: "Parçalar kimler içindir?", answer: "Türkiye’deki üreticiler içindir. Tipik alıcılar makine ve ekipman üreticileri, metal dolap veya gövde ihtiyacı olan firmalar ve HVAC ekipmanı üreticileridir. Hepsi için aynı teklif yolu kullanılır. Bu grupların dışında bir alıcı da çizim gönderebilir." },
-      { question: "Parçalar nerede üretilir?", answer: "Parçalar Türkiye’de üretilir ve Türkiye’deki alıcılara tedarik edilir. Teslimat EXW, FCA veya DAP’tır; teklifte hangi Incoterm yazılıysa o geçerlidir." },
+      { question: "Corivo ne tedarik eder?", answer: "Corivo özel sac parçalar, kaynaklı muhafazalar ve CNC parçalar tedarik eder. Eksiksiz bir talep 2 iş günü içinde teklif alır. Teklifte fiyat, üretim termini ve üretilebilirlik notu vardır. Gönderimde ülke sınırı yoktur." },
+      { question: "Parçalar kimler içindir?", answer: "Üreticiler içindir. Tipik alıcılar makine ve ekipman üreticileri, metal dolap veya gövde ihtiyacı olan firmalar ve HVAC ekipmanı üreticileridir. Hepsi için aynı teklif yolu kullanılır. Ülke sınırı yoktur." },
+      { question: "Nereye gönderiyorsunuz?", answer: "Dünyanın her yerine gönderiyoruz. Teslimat EXW, FCA veya DAP’tır; teklifte hangi Incoterm yazılıysa o geçerlidir." },
       { question: "Hangi dosya biçimlerini kabul ediyorsunuz?", answer: "DXF, DWG, STEP (.stp dahil) ve PDF kabul ederiz. En fazla 8 dosya ekleyebilirsiniz ve her dosya 20 MB’a kadar olabilir. Tek başına PDF yerine DXF veya STEP daha güvenilirdir. Üretim çiziminden önce NDA istiyorsanız bunu söyleyen tek sayfalık bir PDF ekleyin ve notlara yazın. NDA göndeririz." },
       { question: "Asgari sipariş adedi nedir?", answer: "Her parça için tek bir asgari adet yayımlamayız. Teklif, üretebileceğimiz adedi ve daha küçük ya da daha büyük bir partinin fiyatı değiştirip değiştirmediğini yazar. Tahmini yıllık adedi de yazın ki fiyat yalnızca ilk partiye değil, tekrara da baksın." },
       { question: "Teklif ne kadar sürer, üretim ne kadar sürer?", answer: "Eksiksiz bir talepten sonra 2 iş günü içinde teklif alırsınız: parçanın çizimi veya tarifi, iş e-postası, malzeme, adet, tahmini yıllık adet, ad ve firma. Kalınlık ve teslim tarihi isteğe bağlıdır. Bir dosyayı okuyamazsak başka bir kopya isteriz ve 2 iş günü, çizim okunabildiğinde başlar. Üretim termini ayrıdır. Teklifte yazılır ve malzemeye, adede, yüzeye ve kararlaştırılan Incoterm’e bağlıdır." },
@@ -895,23 +924,23 @@ function turkish(): Copy {
   };
   copy.industries = {
     title: "Sektörler",
-    description: "Türkiye’deki üreticiler için özel sac, muhafaza ve CNC parçalar. Makine ve ekipman üreticileri, dolap ve gövde işleri ve HVAC firmaları dahildir.",
+    description: "Özel sac, muhafaza ve CNC parçalar. Makine ve ekipman üreticileri, dolap ve gövde işleri ve HVAC firmaları dahildir. Gönderimde ülke sınırı yoktur.",
     kicker: "SEKTÖRLER",
     heading: "Parçalar kimler içindir",
-    lede: "Türkiye’de parça ihtiyacı olan üreticiler. Aşağıdaki gruplar sık görülen kullanımlardır, kapalı bir liste değildir. Teklif yolu aynıdır: çizim veya tarif, yıllık adet ve 2 iş günü içinde yanıt.",
+    lede: "Aşağıdaki gruplar sık görülen kullanımlardır, kapalı bir liste değildir ve ülke sınırı yoktur. Teklif yolu aynıdır: çizim veya tarif, yıllık adet ve 2 iş günü içinde yanıt.",
     crumb: "Sektörler",
     items: [
-      { id: "machine-builders", title: "Makine ve ekipman üreticileri", lede: "Türkiye’de üretilen makine ve endüstriyel ekipman için koruyucular, çerçeveler, kapaklar ve kaynaklı şaseler.", parts: ["Sac koruyucular ve kapaklar", "Makine çerçeveleri ve kaynaklı şaseler", "Braketler ve montaj plakaları", "Makineye civatalanan dolaplar"], send: "Üretilmesini istediğiniz parça çizimlerini gönderin. Montajı yalnızca kaynak, menteşe veya oturmayı anlatıyorsa ekleyin. Kaliteyi ve yıllık adedi yazın.", href: "/sheet-metal", linkLabel: "Sac" },
+      { id: "machine-builders", title: "Makine ve ekipman üreticileri", lede: "Makine ve endüstriyel ekipman için koruyucular, çerçeveler, kapaklar ve kaynaklı şaseler.", parts: ["Sac koruyucular ve kapaklar", "Makine çerçeveleri ve kaynaklı şaseler", "Braketler ve montaj plakaları", "Makineye civatalanan dolaplar"], send: "Üretilmesini istediğiniz parça çizimlerini gönderin. Montajı yalnızca kaynak, menteşe veya oturmayı anlatıyorsa ekleyin. Kaliteyi ve yıllık adedi yazın.", href: "/sheet-metal", linkLabel: "Sac" },
       { id: "panel-builders", title: "Dolaplar ve gövdeler", lede: "Metal dolaplar, kontrol gövdeleri, kapaklar ve montaj plakaları. Elektrik ticaretinde bu alıcıya çoğu zaman pano üreticisi denir. Corivo içindeki kablolamayı değil, metal muhafazayı tedarik eder.", parts: ["Kaynaklı kutular ve dolaplar", "Kapaklar ve montaj plakaları", "Rakor plakaları ve DXF kesimleri", "Toz boyalı gövdeler"], send: "Kesimleri DXF’e koyun. Kutu boyanacaksa RAL’i yazın ve hangi yüzeylerin veya dişlerin boyasız kalacağını söyleyin. Kutu kaynaklıysa STEP dosyası yardımcı olur.", href: "/enclosures", linkLabel: "Muhafazalar" },
       { id: "hvac", title: "HVAC ekipmanı", lede: "Isıtma, havalandırma ve hava işleme ekipmanı için gövdeler, kanal parçaları, erişim kapakları ve braketler. Galvanizli sac, paslanmaz veya alüminyum.", parts: ["Ekipman gövdeleri", "Kanal parçaları ve geçişler", "Erişim kapakları", "Galvanizli veya paslanmaz braketler"], send: "Kaliteyi değiştiren bir ortam varsa yazın. Galvanizli sacta belirli bir kaplama sınıfı gerekiyorsa adını belirtin.", href: "/sheet-metal", linkLabel: "Sac" },
     ],
   };
   copy.about = {
     title: "Hakkında",
-    description: "Corivo, Türkiye’deki üreticiler için özel sac parçalar, muhafazalar ve CNC parçalar üretir.",
+    description: "Corivo, özel sac parçalar, muhafazalar ve CNC parçalar üretir. Gönderimde ülke sınırı yoktur.",
     kicker: "HAKKINDA",
     heading: "Corivo hakkında",
-    lede: "Corivo, Türkiye’deki üreticiler için özel sac parçalar, muhafazalar ve CNC parçalar üretir. Alıcılar makine ve ekipman üreticileri, metal dolap veya gövde ihtiyacı olan firmalar ve HVAC firmalarıdır.",
+    lede: "Corivo, özel sac parçalar, muhafazalar ve CNC parçalar üretir. Alıcılar makine ve ekipman üreticileri, metal dolap veya gövde ihtiyacı olan firmalar ve HVAC firmalarıdır. Ülke sınırı yoktur.",
     crumb: "Hakkında",
     paragraphs: [
       "İlk çizimden sonraki partilere kadar tek bir kişiyle çalışırsınız. Bu site İngilizce, Almanca ve Türkçedir.",
@@ -946,7 +975,7 @@ function turkish(): Copy {
   };
   copy.enclosures = {
     title: "Muhafazalar ve kaynaklı montajlar",
-    description: "Türkiye’de üretilen kaynaklı muhafazalar, çerçeveler ve dolaplar. Rengi belirttiğinizde toz boya da teklife girer. Her sevkiyatta ölçü raporu ve fotoğraflar vardır.",
+    description: "Kaynaklı muhafazalar, çerçeveler ve dolaplar. Rengi belirttiğinizde toz boya da teklife girer. Her sevkiyatta ölçü raporu ve fotoğraflar vardır. Gönderimde ülke sınırı yoktur.",
     kicker: "MUHAFAZALAR",
     heading: "Muhafazalar ve kaynaklı montajlar",
     lede: "Kaynaklı kutular, çerçeveler, makine dolapları ve ekipman gövdeleri. Rengi ve boyasız kalması gereken yüzeyleri belirttiğinizde toz boya teklifin parçasıdır.",
@@ -977,7 +1006,7 @@ function turkish(): Copy {
   };
   copy.cnc = {
     title: "CNC işleme",
-    description: "Türkiye’de freze ve torna. STEP ve PDF gönderin. Dişler, geçmeler ve önemli yüzeyler üretilebilirlik notunda doğrulanır.",
+    description: "Freze ve torna. STEP ve PDF gönderin. Dişler, geçmeler ve önemli yüzeyler üretilebilirlik notunda doğrulanır. Gönderimde ülke sınırı yoktur.",
     kicker: "CNC",
     heading: "CNC işleme",
     lede: "Freze ve torna, tek prototipten tekrarlı partiye. STEP ve PDF gönderin. Üretilebilirlik notu, teklifi kabul etmeden önce çizimde gördüğümüzü yazar.",
@@ -1032,7 +1061,7 @@ function turkish(): Copy {
     lede: "Bu siteyi işletenin kimliği. “Henüz yayımlanmadı” satırı site ayarında doldurulmamıştır. Uydurma bir adres değildir.",
     crumb: "Künye",
     labels: ["Yasal unvan", "Adres", "Posta kodu", "Şehir", "Ülke", "Sicil", "KDV", "Temsil eden", "E-posta", "Telefon"],
-    closing: "Corivo, Türkiye’deki üreticiler için özel sac parçalar, muhafazalar ve CNC parçalar üretir. Bu site İngilizce, Almanca ve Türkçedir. İngilizce sayfalar Avrupa’daki alıcılar, Almanca sayfalar Almanya, Avusturya ve İsviçre’deki alıcılar içindir.",
+    closing: "Corivo özel sac parçalar, muhafazalar ve CNC parçalar üretir ve dünyanın her yerine gönderir. Bu site İngilizce, Almanca ve Türkçedir.",
   };
   copy.privacy = {
     ...copy.privacy,
@@ -1089,7 +1118,7 @@ function turkish(): Copy {
     crumb: "Koşullar",
     updated: "Son güncelleme",
     sections: [
-      { title: "Site", body: "Site, Türkiye’de üretilen sac parçalar, muhafazalar ve CNC parçalar için nasıl teklif isteneceğini anlatır. Fiyat listelemez ve ödeme almaz. Form göndermek sipariş değil, teklif talebidir." },
+      { title: "Site", body: "Site, sac parçalar, muhafazalar ve CNC parçalar için nasıl teklif isteneceğini anlatır. Fiyat listelemez ve ödeme almaz. Form göndermek sipariş değil, teklif talebidir." },
       { title: "Teklifler", body: "Eksiksiz bir talepte parçanın çizimi veya tarifi, iş e-postası, malzeme, adet, tahmini yıllık adet, ad ve firma vardır. Kalınlık ve teslim tarihi isteğe bağlıdır. Eksiksiz bir talebe 2 iş günü içinde yanıt veririz. Çizim ekliyse ve okunamıyorsa 2 iş günü, çizim okunabildiğinde başlar. Yanıtta fiyat, üretim termini ve üretilebilirlik notu vardır. Teklifin açık kaldığı tarih teklifte yazılıdır." },
       { title: "Çiziminiz", body: "Gönderdiğiniz çizimden, kaliteden ve ölçülerden siz sorumlusunuz. Bir dosya değiştiyse söyleyin. Dosyaları teklif için, sipariş olursa üretmek için kullanırız. Yayımlamayız. Üretim dosyalarını göndermeden önce talep üzerine NDA vardır." },
       { title: "Üretilebilirlik notu", body: "Not, gördüğümüzü işaret eder: bir büküm, bir kaynak, eksik bir ölçü veya bir kaplama. Tam bir tasarım incelemesi değildir ve tasarım sorumluluğunu bize geçirmez. Bir istisnanın üretimi, not dahil teklifi yazılı kabul ettikten sonra başlar." },
@@ -1178,24 +1207,24 @@ function turkish(): Copy {
   copy.form = {
     title: "Teklif iste",
     window: "2 İŞ GÜNÜ",
-    intro: "Eksiksiz bir talebe 2 iş günü içinde yanıt veririz. Yanıtta fiyat, termin ve üretilebilirlik notu vardır.",
-    requiredNote: "Parçanın çizimi veya tarifi gerekir. Diğer zorunlu alanlar işaretlidir.",
+    intro: "2 iş günü içinde fiyat, termin ve üretilebilirlik notu.",
+    requiredNote: "Parçanın çizimi veya kısa bir tarifi gerekir.",
     honeypot: "Bu alanı boş bırakın",
     drawings: "Çizimler",
-    drawingsHint: "DXF, DWG, STEP veya PDF. En fazla 8 dosya, her biri 20 MB. Notlar parçayı tarif etmiyorsa zorunludur. Önce NDA mı gerekiyor? Bunu söyleyen tek sayfalık bir PDF ekleyin.",
+    drawingsHint: "DXF, DWG, STEP veya PDF · en fazla 8 dosya, her biri 20 MB",
     choose: "Dosya seç",
-    drop: "Ya da dosyaları buraya bırakın.",
+    drop: "Ya da dosyaları buraya bırakın",
     remove: "Kaldır",
     notes: "Notlar",
-    notesHint: "Çizim eklemiyorsanız zorunludur. Parçayı tarif edin veya toz boya RAL’i, donanımı, kaynak notunu ya da NDA talebini yazın.",
+    notesHint: "Çizim yoksa parçayı tarif edin. RAL, donanım, kaynak notu veya NDA talebini buraya yazın.",
     email: "İş e-postası",
     material: "Malzeme",
-    materialHint: "Parçada birden fazla kalite varsa ana kaliteyi seçin, diğerlerini notlara yazın.",
+    materialHint: "Ana kalite; diğerlerini notlara yazın.",
     materialPlaceholder: "Bir malzeme seçin",
     quantity: "Adet (bu sipariş)",
     quantityHint: "Bu partideki parça sayısı.",
-    annual: "Tahmini yıllık adet (parça)",
-    annualHint: "Sonraki partiler dahil, on iki ayda beklediğiniz parça sayısı.",
+    annual: "Tahmini yıllık adet",
+    annualHint: "On iki ayda beklenen parça sayısı.",
     annualUnknown: "Henüz bilmiyorum",
     name: "Ad",
     nameHint: "Yanıtlayacağımız kişi.",
@@ -1205,11 +1234,17 @@ function turkish(): Copy {
     countryFocus: "Odak",
     countryOther: "Diğer",
     thickness: "Kalınlık (mm)",
-    thicknessHint: "Örnek: 2.0. Çizim yazıyorsa veya henüz bilmiyorsanız boş bırakın.",
+    thicknessHint: "Çizimde varsa boş bırakın.",
     delivery: "Teslim tarihi",
-    deliveryHint: "Parçaları istediğiniz tarih. Termin teklifte doğrulanır.",
+    deliveryHint: "Termin teklifte doğrulanır.",
     flexible: "Esnek",
     optional: "isteğe bağlı",
+    optionalDetails: "İsteğe bağlı detaylar",
+    stepPart: "Parça",
+    stepSpecs: "Özellikler",
+    stepContact: "İletişim",
+    continue: "Devam",
+    back: "Geri",
     submit: "Teklif iste",
     sending: "Gönderiliyor…",
     privacyBefore: "Çizimler özel bir dosya alanında tutulur ve teklifi hazırlamak için kullanılır.",

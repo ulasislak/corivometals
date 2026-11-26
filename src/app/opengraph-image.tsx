@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Corivo. Sheet metal parts and enclosures from Türkiye. Quote in 2 business days.";
+export const alt = "Corivo. Sheet metal parts and enclosures. Quote in 2 business days.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -26,7 +26,7 @@ export default function OpenGraphImage() {
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ display: "flex", fontSize: 64, fontWeight: 700, lineHeight: 1.1, maxWidth: 980 }}>
-            Sheet metal parts and enclosures from Türkiye.
+            Sheet metal parts and enclosures.
           </div>
           <div style={{ display: "flex", marginTop: 24, fontSize: 28, color: "#334155" }}>
             Quote in 2 business days, with a manufacturability note.

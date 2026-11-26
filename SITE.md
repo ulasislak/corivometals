@@ -1,14 +1,14 @@
 # Corivo sitesinde ne var
 
-Son durum: 22 Kasım 2026. Site üç dilli. İngilizce Avrupa’daki üreticiye, Almanca Almanya, Avusturya ve İsviçre’deki üreticiye, Türkçe Türkiye’deki üreticiye konuşur. Fiyat listesi, anında teklif, müşteri logosu, referans, istatistik ve sertifika yoktur.
+Son durum: 26 Kasım 2026. Site üç dilli. Gönderimde ülke sınırı yoktur. Fiyat listesi, anında teklif, müşteri logosu, referans, istatistik ve sertifika yoktur.
 
 ## Diller
 
 | Adres | Kim için | Dil |
 | --- | --- | --- |
-| `/en` | Avrupa’daki üreticiler | İngilizce, varsayılan |
-| `/de` | Almanya, Avusturya ve İsviçre’deki üreticiler | Almanca |
-| `/tr` | Türkiye’deki üreticiler | Türkçe |
+| `/en` | İngilizce sayfa | İngilizce, varsayılan |
+| `/de` | Almanca sayfa | Almanca |
+| `/tr` | Türkçe sayfa | Türkçe |
 
 Dilsiz adres (`/sheet-metal` gibi) kaydedilmiş dile, o yoksa tarayıcı diline gider. Almanca tarayıcı `/de`, Türkçe tarayıcı `/tr` açar. Üstteki EN / DE / TR aynı sayfada kalır. Seçim `corivo-locale` çerezine yazılır.
 
@@ -68,9 +68,9 @@ Olmayan adres 404 döner. Türkçede başlık: “Bu sayfa çizimde yok.”
 
 ## Ana sayfa cümleleri
 
-İngilizce: “Custom sheet metal parts. Upload a drawing. Quote in 2 business days.”
+İngilizce: “Upload a drawing. Quote in 2 business days.”
 
-Türkçe: “Özel sac parçalar, Türkiye’de. Çizimi yükle. Teklif 2 iş gününde.”
+Türkçe: “Çizimi yükle. Teklif 2 iş gününde.”
 
 ## Teklif formu
 

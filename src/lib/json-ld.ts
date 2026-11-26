@@ -10,14 +10,7 @@ export function organizationJsonLd(description: string, lang: Locale = "en"): Re
     url: siteUrl,
     description,
     inLanguage: lang,
-    areaServed: [
-      { "@type": "Place", name: "Europe" },
-      { "@type": "Country", name: "Germany" },
-      { "@type": "Country", name: "Austria" },
-      { "@type": "Country", name: "Netherlands" },
-      { "@type": "Country", name: "Belgium" },
-      { "@type": "Country", name: "Luxembourg" },
-    ],
+    areaServed: { "@type": "Place", name: "Worldwide" },
     knowsLanguage: [...locales],
     knowsAbout: [
       "Sheet metal fabrication",
@@ -29,7 +22,7 @@ export function organizationJsonLd(description: string, lang: Locale = "en"): Re
     ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Parts made in Türkiye",
+      name: "Custom parts",
       itemListElement: [
         {
           "@type": "Offer",
@@ -93,13 +86,74 @@ export function faqPageJsonLd(items: readonly FaqItem[], lang: Locale = "en"): R
 }
 
 export function breadcrumbJsonLd(name: string, path: string, homeName = "Home", homePath = "/"): Record<string, unknown> {
+  return breadcrumbListJsonLd([
+    { name: homeName, path: homePath },
+    { name, path },
+  ]);
+}
+
+export function breadcrumbListJsonLd(
+  crumbs: readonly { name: string; path: string }[],
+): Record<string, unknown> {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: homeName, item: `${siteUrl}${homePath}` },
-      { "@type": "ListItem", position: 2, name, item: `${siteUrl}${path}` },
-    ],
+    itemListElement: crumbs.map((crumb, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: crumb.name,
+      item: crumb.path.startsWith("http") ? crumb.path : `${siteUrl}${crumb.path}`,
+    })),
+  };
+}
+
+export function serviceJsonLd(input: {
+  name: string;
+  description: string;
+  path: string;
+  lang: Locale;
+}): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: input.name,
+    description: input.description,
+    url: `${siteUrl}${input.path}`,
+    inLanguage: input.lang,
+    provider: {
+      "@type": "Organization",
+      name: siteName,
+      url: siteUrl,
+    },
+    areaServed: { "@type": "Place", name: "Worldwide" },
+  };
+}
+
+export function webApplicationJsonLd(input: {
+  name: string;
+  description: string;
+  path: string;
+  lang: Locale;
+}): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: input.name,
+    description: input.description,
+    url: `${siteUrl}${input.path}`,
+    inLanguage: input.lang,
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Any",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "EUR",
+    },
+    provider: {
+      "@type": "Organization",
+      name: siteName,
+      url: siteUrl,
+    },
   };
 }
 

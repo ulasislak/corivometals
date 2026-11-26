@@ -57,12 +57,12 @@ export const rootMetadata: Metadata = {
     type: "website",
     locale: "en_GB",
     siteName,
-    title: `${siteName} — Sheet metal parts and enclosures from Türkiye`,
+    title: `${siteName} — Sheet metal parts and enclosures`,
     description: siteDescription,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteName} — Sheet metal parts and enclosures from Türkiye`,
+    title: `${siteName} — Sheet metal parts and enclosures`,
     description: siteDescription,
   },
 };

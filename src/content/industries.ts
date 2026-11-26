@@ -2,7 +2,7 @@ export const industries = [
   {
     id: "machine-builders",
     title: "Machine and equipment makers",
-    lede: "Guards, frames, covers, and welded bases for machines and industrial equipment built in Europe.",
+    lede: "Guards, frames, covers, and welded bases for machines and industrial equipment.",
     parts: [
       "Sheet-metal guards and covers",
       "Machine frames and welded bases",

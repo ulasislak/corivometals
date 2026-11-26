@@ -7,17 +7,17 @@ export const faqItems: FaqItem[] = [
   {
     question: "What does Corivo supply?",
     answer:
-      "Corivo supplies custom sheet metal parts, welded enclosures, and CNC parts made in Türkiye. A complete request receives a quote within 2 business days. The quote includes a price, a production lead time, and a manufacturability note.",
+      "Corivo supplies custom sheet metal parts, welded enclosures, and CNC parts. A complete request receives a quote within 2 business days. The quote includes a price, a production lead time, and a manufacturability note. We ship worldwide.",
   },
   {
     question: "Who are the parts for?",
     answer:
-      "Manufacturers in Europe. Typical buyers are machine and equipment makers, companies that need metal cabinets or housings, and HVAC equipment builders. The same quote path is used for each. A buyer outside those groups can send a drawing too.",
+      "Manufacturers. Typical buyers are machine and equipment makers, companies that need metal cabinets or housings, and HVAC equipment builders. The same quote path is used for each. There is no country limit.",
   },
   {
-    question: "Where are the parts made?",
+    question: "Where do you ship?",
     answer:
-      "The parts are made in Türkiye and supplied to buyers in Europe. Delivery is EXW, FCA, or DAP, whichever Incoterm is printed on the quote.",
+      "We ship worldwide. Delivery is EXW, FCA, or DAP, whichever Incoterm is printed on the quote.",
   },
   {
     question: "Which file formats do you accept?",

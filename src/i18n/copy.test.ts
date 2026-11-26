@@ -33,8 +33,12 @@ describe("locale copy", () => {
       expect(copy.steps).toHaveLength(en.steps.length);
       expect(copy.claims).toHaveLength(en.claims.length);
     }
-    expect(tr.home.h1).toContain("Türkiye");
-    expect(de.home.h1).toContain("Türkiye");
+    expect(tr.home.h1).not.toContain("Türkiye");
+    expect(de.home.h1).not.toContain("Türkiye");
+    expect(en.home.lede.toLowerCase()).toContain("worldwide");
+    expect(published("en")).not.toContain("türkiye");
+    expect(published("de")).not.toContain("türkiye");
+    expect(published("tr")).not.toContain("türkiye");
     expect(de.home.h1).toContain("2 Werktagen");
     expect(published("tr")).not.toContain("turkey");
     expect(published("de")).not.toContain("turkey");

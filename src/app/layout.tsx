@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { JetBrains_Mono, Manrope } from "next/font/google";
 import { Analytics, CookieConsent } from "@/components/consent";
 import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
@@ -29,9 +29,9 @@ gtag("js", new Date());
 (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({"gtm.start":new Date().getTime(),event:"gtm.js"});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!="dataLayer"?"&l="+l:"";j.async=true;j.src="https://www.googletagmanager.com/gtm.js?id="+i+dl;f.parentNode.insertBefore(j,f);})(window,document,"script","dataLayer","${gtmId}");
 `;
 
-const inter = Inter({
+const sans = Manrope({
   subsets: ["latin", "latin-ext"],
-  variable: "--font-inter",
+  variable: "--font-sans",
   display: "swap",
 });
 
@@ -40,6 +40,8 @@ const mono = JetBrains_Mono({
   variable: "--font-mono",
   display: "swap",
 });
+
+const rootFontClass = `${sans.variable} ${mono.variable} ${sans.className}`;
 
 export const metadata: Metadata = rootMetadata;
 
@@ -54,11 +56,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const lang = isLocale(requested) ? requested : "en";
   const copy = getCopy(lang);
   return (
-    <html lang={lang} className={`${inter.variable} ${mono.variable}`}>
+    <html lang={lang} className={rootFontClass}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: gtmBootstrap }} />
       </head>
-      <body className="min-h-screen bg-white font-sans text-slate-900 antialiased">
+      <body className="min-h-screen bg-white font-sans text-slate-900 antialiased [font-feature-settings:'ss01'_on] tracking-[-0.011em]">
         <noscript>
           <iframe
             src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}

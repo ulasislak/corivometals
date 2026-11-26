@@ -24,8 +24,8 @@ const countriesDe: Record<string, string> = {
 
 export function applyGerman(copy: Copy): void {
   copy.description =
-    "Blechteile, geschweißte Gehäuse und CNC-Teile aus Türkiye für Hersteller in Deutschland, Österreich und der Schweiz. Zeichnung hochladen. Angebot in 2 Werktagen, mit Preis, Lieferzeit und Fertigungshinweis.";
-  copy.ogTitle = "Corivo — Blechteile und Gehäuse aus Türkiye";
+    "Blechteile, geschweißte Gehäuse und CNC-Teile. Zeichnung hochladen. Angebot in 2 Werktagen, mit Preis, Lieferzeit und Fertigungshinweis. Wir liefern weltweit.";
+  copy.ogTitle = "Corivo — Blechteile und Gehäuse";
   copy.date = "21. November 2026";
   copy.notPublished = "Noch nicht veröffentlicht";
   copy.chrome.skip = "Zum Inhalt";
@@ -59,6 +59,7 @@ export function applyGerman(copy: Copy): void {
   copy.chrome.legal = [
     { href: "/privacy", label: "Datenschutz" },
     { href: "/terms", label: "Bedingungen" },
+    { href: "/imprint", label: "Impressum" },
   ];
   copy.chrome.footerNote = "Angebot innerhalb von 2 Werktagen. Preise stehen im Angebot, nicht auf dieser Seite.";
   copy.chrome.language = "Sprache";
@@ -71,18 +72,22 @@ export function applyGerman(copy: Copy): void {
     ...copy.home,
     title: "Blechteile und Gehäuse nach Zeichnung",
     eyebrow: "BLECH · GEHÄUSE · CNC",
-    h1: "Blechteile aus Türkiye. Zeichnung hochladen. Angebot in 2 Werktagen.",
-    lede: "Laserschneiden, Kanten, geschweißte Gehäuse und CNC-Teile aus Türkiye. Für Hersteller in Deutschland, Österreich und der Schweiz. Prototypen und Wiederholserien. Senden Sie DXF, DWG, STEP oder PDF.",
-    trust: "Angebot in 2 Werktagen. Fertigungshinweis bei jedem Angebot. Maßprotokoll und Fotos bei jeder Sendung.",
+    h1: "Zeichnung hochladen. Angebot in 2 Werktagen.",
+    lede: "Laserschneiden, Kanten, geschweißte Gehäuse und CNC-Teile. Senden Sie DXF, DWG, STEP oder PDF. Wir liefern weltweit.",
+    trust: "Angebot in 2 Werktagen. Fertigungshinweis bei jedem Angebot. Wir liefern weltweit.",
     processTitle: "Von der Datei zum fertigen Teil",
     processText: "Laden Sie die Zeichnung hoch. Das Angebot kommt innerhalb von 2 Werktagen. Die Fertigungszeit steht im Angebot, nicht in diesen 2 Werktagen.",
     productsTitle: "Was wir fertigen",
     productsText: "Blech, Schweißbaugruppen und CNC-Teile. Werkstoff, Oberfläche und Toleranz kommen aus Ihrer Zeichnung und werden im Angebot bestätigt.",
     families: [
-      { title: "Blech", text: "Lasergeschnittene Platinen und Kantteile: Abdeckungen, Winkel, Knotenbleche und Chassis. Dicke und Biegerichtung stehen in der Zeichnung.", href: "/sheet-metal", link: "Laserschneiden und Kanten", table: "tolerance" },
-      { title: "Gehäuse und Schweißbaugruppen", text: "Geschweißte Kästen, Rahmen, Schutzverkleidungen und Schränke. Nennen Sie RAL und die Flächen, die blank bleiben müssen, wenn Sie Pulver brauchen.", href: "/enclosures", link: "Gehäuse und Pulverbeschichtung", table: "finish" },
-      { title: "CNC-Bearbeitung", text: "Gefräste und gedrehte Teile, vom Einzelprototyp bis zur Wiederholserie. Gewinde, Passungen und die maßgeblichen Flächen gehören auf die Zeichnung.", href: "/cnc-parts", link: "CNC-Bearbeitung", table: "cnc" },
+      { title: "Blech", text: "Lasergeschnittene Platinen und Kantteile: Abdeckungen, Winkel, Knotenbleche und Chassis. Dicke und Biegerichtung stehen in der Zeichnung.", href: "/sheet-metal", link: "Laserschneiden und Kanten", table: "tolerance", imageAlt: "Laserschneiden von Blech" },
+      { title: "Gehäuse und Schweißbaugruppen", text: "Geschweißte Kästen, Rahmen, Schutzverkleidungen und Schränke. Nennen Sie RAL und die Flächen, die blank bleiben müssen, wenn Sie Pulver brauchen.", href: "/enclosures", link: "Gehäuse und Pulverbeschichtung", table: "finish", imageAlt: "Pulverbeschichtung einer Metallbaugruppe in einer Lackierkabine" },
+      { title: "CNC-Bearbeitung", text: "Gefräste und gedrehte Teile, vom Einzelprototyp bis zur Wiederholserie. Gewinde, Passungen und die maßgeblichen Flächen gehören auf die Zeichnung.", href: "/cnc-parts", link: "CNC-Bearbeitung", table: "cnc", imageAlt: "CNC-Fräsen eines Metallblocks" },
     ],
+    cuttingAlt: "Bearbeitete Metallteile",
+    photoNote: "Beispielfotos. Das sind keine Teile aus einem Corivo-Auftrag.",
+    heroQuote: "Angebot anfragen",
+    heroProducts: "Was wir fertigen",
     whyTitle: "Eine Zeichnung, ein Angebot, ein Ansprechpartner",
     faqTitle: "Vor dem Hochladen",
     faqLink: "FAQ öffnen",
@@ -97,7 +102,7 @@ export function applyGerman(copy: Copy): void {
   copy.steps = [
     { n: "01", title: "Zeichnung hochladen", text: "Senden Sie DXF, DWG, STEP oder PDF, oder beschreiben Sie das Teil in den Notizen. Nennen Sie Werkstoff, Stückzahl dieser Bestellung und die geschätzte Jahresmenge." },
     { n: "02", title: "Angebot mit Fertigungshinweis", text: "Innerhalb von 2 Werktagen erhalten Sie einen Preis, eine Lieferzeit und einen Hinweis zu allem, was vor dem Schneiden, Kanten oder Schweißen bestätigt werden muss." },
-    { n: "03", title: "Fertigung und Prüfung", text: "Nachdem Sie das Angebot schriftlich annehmen und die Anzahlung leisten, werden die Teile in Türkiye gefertigt und gegen die angenommene Zeichnung geprüft." },
+    { n: "03", title: "Fertigung und Prüfung", text: "Nachdem Sie das Angebot schriftlich annehmen und die Anzahlung leisten, werden die Teile gefertigt und gegen die angenommene Zeichnung geprüft. Wir liefern weltweit." },
     { n: "04", title: "Lieferung", text: "Jede Sendung enthält ein Maßprotokoll und Fotos. Geliefert wird EXW, FCA oder DAP, wie im Angebot geschrieben. Der Restbetrag ist vor dem Versand fällig." },
   ];
   copy.reasons = [
@@ -108,7 +113,7 @@ export function applyGerman(copy: Copy): void {
   copy.quoteContents = ["Preis und Währung", "Fertigungszeit", "Incoterm und benannter Ort", "Anzahlung und Restbetrag", "Fertigungshinweis", "Angebotsreferenz", "Das Datum, bis zu dem das Angebot gilt"];
   copy.how = {
     title: "Ablauf",
-    description: "Zeichnung hochladen, innerhalb von 2 Werktagen Angebot und Fertigungshinweis erhalten, danach Fertigung in Türkiye, Prüfung und Lieferung EXW, FCA oder DAP.",
+    description: "Zeichnung hochladen, innerhalb von 2 Werktagen Angebot und Fertigungshinweis erhalten, danach Fertigung, Prüfung und weltweite Lieferung EXW, FCA oder DAP.",
     kicker: "ABLAUF",
     heading: "So läuft ein Corivo-Auftrag",
     lede: "Ein Ansprechpartner, eine Angebotsreferenz und ein schriftlicher Fertigungshinweis, bevor Metall geschnitten wird. Zahlung ist eine Anzahlung, dann der Restbetrag vor dem Versand. Diese Website nimmt keine Zahlung an.",
@@ -116,7 +121,7 @@ export function applyGerman(copy: Copy): void {
     detail: [
       "Nutzen Sie DXF, DWG, STEP oder PDF, oder beschreiben Sie das Teil, wenn die Zeichnung noch nicht fertig ist. Nennen Sie Werkstoff, Stückzahl dieses Loses und die geschätzte Jahresmenge. Dicke und ein Lieferdatum helfen, wenn Sie sie kennen. Wenn Sie vor der Fertigungsdatei eine NDA brauchen, hängen Sie ein einseitiges PDF an, das das sagt.",
       "Die Antwort enthält einen Preis, eine Fertigungszeit, einen Incoterm und einen Fertigungshinweis. Der Hinweis markiert eine zu enge Biegung, eine fehlende Schweißnaht oder eine nicht genannte Beschichtung. Er ist keine Neukonstruktion. Sie nehmen das Angebot einschließlich dieses Hinweises schriftlich an.",
-      "Die Fertigung beginnt nach schriftlicher Annahme und der Anzahlung. Die Teile werden in Türkiye gefertigt und gegen die angenommene Zeichnung geprüft. Diese 2 Werktage gelten nicht für diesen Schritt. Es gilt die Lieferzeit im Angebot.",
+      "Die Fertigung beginnt nach schriftlicher Annahme und der Anzahlung. Die Teile werden gefertigt und gegen die angenommene Zeichnung geprüft. Diese 2 Werktage gelten nicht für diesen Schritt. Es gilt die Lieferzeit im Angebot. Wir liefern weltweit.",
       "Sie erhalten die Teile, ein Maßprotokoll und Fotos. Ein Werkstoffzeugnis liegt bei, wenn der Auftrag danach gefragt hat. Der Restbetrag ist vor dem Versand fällig. EXW, FCA oder DAP ist der Begriff, der auf dem Angebot steht.",
     ],
     contains: "Was das Angebot enthält",
@@ -124,15 +129,15 @@ export function applyGerman(copy: Copy): void {
   };
   copy.faq = {
     title: "FAQ",
-    description: "Was Corivo liefert, für wen die Teile sind, wo sie gefertigt werden, Dateiformate, Mindestmenge, Angebot in 2 Werktagen, EXW, FCA, DAP, Zahlung, NDA und Nachfertigung.",
+    description: "Was Corivo liefert, für wen die Teile sind, weltweite Lieferung, Dateiformate, Mindestmenge, Angebot in 2 Werktagen, EXW, FCA, DAP, Zahlung, NDA und Nachfertigung.",
     kicker: "FAQ",
     heading: "Häufige Fragen",
-    lede: "Was Corivo liefert, für wen die Teile sind und wo sie gefertigt werden. Danach Formate, Menge, Zeit, Lieferbedingungen, Zahlung, Vertraulichkeit und Teile, die nicht zur Zeichnung passen.",
+    lede: "Was Corivo liefert, für wen die Teile sind und wohin wir liefern. Danach Formate, Menge, Zeit, Lieferbedingungen, Zahlung, Vertraulichkeit und Teile, die nicht zur Zeichnung passen.",
     crumb: "FAQ",
     items: [
-      { question: "Was liefert Corivo?", answer: "Corivo liefert Blechteile, geschweißte Gehäuse und CNC-Teile aus Türkiye. Eine vollständige Anfrage erhält innerhalb von 2 Werktagen ein Angebot. Das Angebot enthält einen Preis, eine Fertigungszeit und einen Fertigungshinweis." },
-      { question: "Für wen sind die Teile?", answer: "Für Hersteller in Deutschland, Österreich und der Schweiz. Typische Käufer sind Maschinen- und Anlagenbauer, Firmen mit Bedarf an Metallschränken oder Gehäusen und Hersteller von HLK-Geräten. Der Angebotsweg ist derselbe. Auch ein Käufer außerhalb dieser Gruppen kann eine Zeichnung senden." },
-      { question: "Wo werden die Teile gefertigt?", answer: "Die Teile werden in Türkiye gefertigt und an Käufer in Deutschland, Österreich und der Schweiz geliefert. Die Lieferung ist EXW, FCA oder DAP, je nachdem welcher Incoterm auf dem Angebot steht." },
+      { question: "Was liefert Corivo?", answer: "Corivo liefert Blechteile, geschweißte Gehäuse und CNC-Teile. Eine vollständige Anfrage erhält innerhalb von 2 Werktagen ein Angebot. Das Angebot enthält einen Preis, eine Fertigungszeit und einen Fertigungshinweis. Wir liefern weltweit." },
+      { question: "Für wen sind die Teile?", answer: "Für Hersteller. Typische Käufer sind Maschinen- und Anlagenbauer, Firmen mit Bedarf an Metallschränken oder Gehäusen und Hersteller von HLK-Geräten. Der Angebotsweg ist derselbe. Es gibt keine Ländergrenze." },
+      { question: "Wohin liefern Sie?", answer: "Wir liefern weltweit. Die Lieferung ist EXW, FCA oder DAP, je nachdem welcher Incoterm auf dem Angebot steht." },
       { question: "Welche Dateiformate nehmen Sie an?", answer: "Wir nehmen DXF, DWG, STEP (einschließlich .stp) und PDF an. Sie können bis zu 8 Dateien anhängen, jede bis 20 MB. Eine DXF- oder STEP-Datei ist verlässlicher als ein PDF allein. Wenn Sie vor der Fertigungszeichnung eine NDA brauchen, hängen Sie ein einseitiges PDF an, das das sagt, und schreiben Sie es in die Notizen. Wir senden eine NDA." },
       { question: "Wie hoch ist die Mindestbestellmenge?", answer: "Wir veröffentlichen nicht eine Mindestmenge für jedes Teil. Das Angebot nennt die Menge, die wir fertigen können, und ob ein kleineres oder größeres Los den Preis ändert. Nennen Sie die geschätzte Jahresmenge, damit der Preis nicht nur das erste Los abbildet." },
       { question: "Wie lange dauert ein Angebot, und wie lange die Fertigung?", answer: "Sie erhalten innerhalb von 2 Werktagen nach einer vollständigen Anfrage ein Angebot: Zeichnung oder Beschreibung des Teils, geschäftliche E-Mail, Werkstoff, Stückzahl, geschätzte Jahresmenge, Name und Firma. Dicke und Lieferdatum sind optional. Können wir eine Datei nicht lesen, bitten wir um eine weitere Kopie, und die 2 Werktage beginnen, wenn die Zeichnung lesbar ist. Die Fertigungszeit ist getrennt. Sie steht im Angebot und hängt von Werkstoff, Menge, Oberfläche und dem vereinbarten Incoterm ab." },
@@ -146,10 +151,10 @@ export function applyGerman(copy: Copy): void {
   };
   copy.industries = {
     title: "Branchen",
-    description: "Blechteile, Gehäuse und CNC-Teile aus Türkiye für Hersteller in Deutschland, Österreich und der Schweiz, einschließlich Maschinen- und Anlagenbau, Schrank- und Gehäusebau und HLK.",
+    description: "Blechteile, Gehäuse und CNC-Teile für Maschinen- und Anlagenbau, Schrank- und Gehäusebau und HLK. Wir liefern weltweit.",
     kicker: "BRANCHEN",
     heading: "Für wen die Teile sind",
-    lede: "Hersteller in Deutschland, Österreich und der Schweiz, die Teile aus Türkiye kaufen. Die Gruppen unten sind häufige Anwendungen, keine geschlossene Liste. Der Angebotsweg ist derselbe: eine Zeichnung oder eine Beschreibung, die Jahresmenge und eine Antwort innerhalb von 2 Werktagen.",
+    lede: "Die Gruppen unten sind häufige Anwendungen, keine geschlossene Liste, und es gibt keine Ländergrenze. Der Angebotsweg ist derselbe: eine Zeichnung oder eine Beschreibung, die Jahresmenge und eine Antwort innerhalb von 2 Werktagen.",
     crumb: "Branchen",
     items: [
       { id: "machine-builders", title: "Maschinen- und Anlagenbauer", lede: "Schutzverkleidungen, Rahmen, Abdeckungen und geschweißte Grundgestelle für Maschinen und Industrieanlagen.", parts: ["Blechverkleidungen und Abdeckungen", "Maschinenrahmen und geschweißte Gestelle", "Winkel und Montageplatten", "Schränke, die an eine Maschine geschraubt werden"], send: "Senden Sie die Teilezeichnungen, die gefertigt werden sollen, und die Baugruppe nur, wenn sie Schweißnähte, Scharniere oder den Zusammenbau erklärt. Nennen Sie Werkstoff und Jahresmenge.", href: "/sheet-metal", linkLabel: "Blech" },
@@ -159,13 +164,13 @@ export function applyGerman(copy: Copy): void {
   };
   copy.about = {
     title: "Über uns",
-    description: "Corivo ist ein Beschaffungspartner für Blechteile, Gehäuse und CNC-Teile aus Türkiye für Hersteller in Deutschland, Österreich und der Schweiz.",
+    description: "Corivo ist ein Beschaffungspartner für Blechteile, Gehäuse und CNC-Teile. Wir liefern weltweit.",
     kicker: "ÜBER UNS",
     heading: "Über Corivo",
-    lede: "Corivo ist ein Beschaffungspartner für Blechteile, Gehäuse und CNC-Teile aus Türkiye. Die Käufer sind Hersteller in Deutschland, Österreich und der Schweiz, darunter Maschinen- und Anlagenbauer, Firmen mit Bedarf an Metallschränken oder Gehäusen und HLK-Firmen.",
+    lede: "Corivo ist ein Beschaffungspartner für Blechteile, Gehäuse und CNC-Teile. Die Käufer sind Maschinen- und Anlagenbauer, Firmen mit Bedarf an Metallschränken oder Gehäusen und HLK-Firmen. Es gibt keine Ländergrenze.",
     crumb: "Über uns",
     paragraphs: [
-      "Sie arbeiten von der ersten Zeichnung bis zu späteren Losen mit einem Ansprechpartner. Diese Website gibt es auf Englisch, Deutsch und Türkisch. Die deutschen Seiten richten sich an Hersteller in Deutschland, Österreich und der Schweiz.",
+      "Sie arbeiten von der ersten Zeichnung bis zu späteren Losen mit einem Ansprechpartner. Diese Website gibt es auf Englisch, Deutsch und Türkisch. Die Lieferung ist nicht auf ein Land beschränkt.",
       "Jedes Angebot enthält einen Fertigungshinweis. Jede Sendung enthält ein Maßprotokoll und Fotos. Ein Werkstoffzeugnis und eine NDA gibt es, wenn Sie danach fragen.",
       "Preise, Fertigungszeiten und Unterlagen, die ein bestimmter Auftrag braucht, stehen im Angebot, wo sie mit der Zeichnung geprüft werden können. Sie stehen nicht auf dieser Website.",
     ],
@@ -197,7 +202,7 @@ export function applyGerman(copy: Copy): void {
   };
   copy.enclosures = {
     title: "Gehäuse und Schweißbaugruppen",
-    description: "Geschweißte Gehäuse, Rahmen und Schränke aus Türkiye, mit Pulverbeschichtung, wenn Sie die Farbe nennen. Jede Sendung enthält ein Maßprotokoll und Fotos.",
+    description: "Geschweißte Gehäuse, Rahmen und Schränke, mit Pulverbeschichtung, wenn Sie die Farbe nennen. Jede Sendung enthält ein Maßprotokoll und Fotos. Wir liefern weltweit.",
     kicker: "GEHÄUSE",
     heading: "Gehäuse und Schweißbaugruppen",
     lede: "Geschweißte Kästen, Rahmen, Maschinenschränke und Gerätegehäuse. Pulverbeschichtung ist Teil des Angebots, wenn Sie die Farbe und die Flächen nennen, die frei von Lack bleiben müssen.",
@@ -228,7 +233,7 @@ export function applyGerman(copy: Copy): void {
   };
   copy.cnc = {
     title: "CNC-Bearbeitung",
-    description: "Gefräste und gedrehte Teile aus Türkiye. Senden Sie STEP und ein PDF. Gewinde, Passungen und die maßgeblichen Flächen werden im Fertigungshinweis bestätigt.",
+    description: "Gefräste und gedrehte Teile. Senden Sie STEP und ein PDF. Gewinde, Passungen und die maßgeblichen Flächen werden im Fertigungshinweis bestätigt. Wir liefern weltweit.",
     kicker: "CNC",
     heading: "CNC-Bearbeitung",
     lede: "Fräsen und Drehen, vom Einzelprototyp bis zur Wiederholserie. Senden Sie STEP und ein PDF. Der Fertigungshinweis bestätigt, was wir auf der Zeichnung sehen, bevor Sie das Angebot annehmen.",
@@ -283,7 +288,7 @@ export function applyGerman(copy: Copy): void {
     lede: "Identität des Betreibers dieser Website. Eine Zeile „Noch nicht veröffentlicht“ ist in der Website-Konfiguration nicht gesetzt. Sie ist keine erfundene Adresse.",
     crumb: "Impressum",
     labels: ["Firmenname", "Adresse", "Postleitzahl", "Ort", "Land", "Register", "USt-IdNr.", "Vertreten durch", "E-Mail", "Telefon"],
-    closing: "Corivo liefert Blechteile, Gehäuse und CNC-Teile aus Türkiye an Hersteller in Deutschland, Österreich und der Schweiz. Diese Website gibt es auf Englisch, Deutsch und Türkisch. Die englischen Seiten richten sich an Käufer in Europa.",
+    closing: "Corivo liefert Blechteile, Gehäuse und CNC-Teile und versendet weltweit. Diese Website gibt es auf Englisch, Deutsch und Türkisch.",
   };
   copy.privacy = {
     ...copy.privacy,
@@ -340,7 +345,7 @@ export function applyGerman(copy: Copy): void {
     crumb: "Bedingungen",
     updated: "Zuletzt aktualisiert",
     sections: [
-      { title: "Die Website", body: "Die Website beschreibt, wie ein Angebot für Blechteile, Gehäuse und CNC-Teile aus Türkiye angefragt wird. Sie listet keine Preise und nimmt keine Zahlung an. Ein Formular zu senden ist eine Angebotsanfrage, kein Auftrag." },
+      { title: "Die Website", body: "Die Website beschreibt, wie ein Angebot für Blechteile, Gehäuse und CNC-Teile angefragt wird. Sie listet keine Preise und nimmt keine Zahlung an. Ein Formular zu senden ist eine Angebotsanfrage, kein Auftrag." },
       { title: "Angebote", body: "Eine vollständige Anfrage enthält eine Zeichnung oder eine Beschreibung des Teils, eine geschäftliche E-Mail, Werkstoff, Stückzahl, geschätzte Jahresmenge, Name und Firma. Dicke und Lieferdatum sind optional. Wir antworten innerhalb von 2 Werktagen auf eine vollständige Anfrage. Ist eine Zeichnung angehängt und nicht lesbar, beginnen die 2 Werktage, wenn die Zeichnung lesbar ist. Die Antwort enthält einen Preis, eine Fertigungszeit und einen Fertigungshinweis. Das Datum, bis zu dem das Angebot offen bleibt, steht auf dem Angebot." },
       { title: "Ihre Zeichnung", body: "Sie sind verantwortlich für die Zeichnung, den Werkstoff und die Maße, die Sie senden. Sagen Sie uns, wenn eine Datei ersetzt wurde. Wir nutzen die Dateien für das Angebot und, wenn Sie bestellen, für die Fertigung. Wir veröffentlichen sie nicht. Eine NDA gibt es auf Anfrage, bevor Sie Fertigungsdateien senden." },
       { title: "Fertigungshinweis", body: "Der Hinweis markiert, was wir sehen: eine Biegung, eine Schweißnaht, ein fehlendes Maß oder eine Beschichtung. Er ist keine vollständige Konstruktionsprüfung und verschiebt die Konstruktionsverantwortung nicht auf uns. Die Fertigung einer Ausnahme beginnt erst, nachdem Sie das Angebot einschließlich des Hinweises schriftlich annehmen." },
@@ -429,38 +434,44 @@ export function applyGerman(copy: Copy): void {
   copy.form = {
     title: "Angebot anfragen",
     window: "2 WERKTAGE",
-    intro: "Wir antworten innerhalb von 2 Werktagen auf eine vollständige Anfrage. Die Antwort enthält Preis, Lieferzeit und einen Fertigungshinweis.",
-    requiredNote: "Eine Zeichnung oder eine Beschreibung des Teils ist nötig. Weitere Pflichtfelder sind markiert.",
+    intro: "Preis, Lieferzeit und Fertigungshinweis innerhalb von 2 Werktagen.",
+    requiredNote: "Eine Zeichnung oder eine kurze Teilbeschreibung ist nötig.",
     honeypot: "Dieses Feld leer lassen",
     drawings: "Zeichnungen",
-    drawingsHint: "DXF, DWG, STEP oder PDF. Bis zu 8 Dateien, je 20 MB. Pflicht, außer die Notizen beschreiben das Teil. Zuerst eine NDA? Hängen Sie ein einseitiges PDF an, das das sagt.",
+    drawingsHint: "DXF, DWG, STEP oder PDF · bis zu 8 Dateien, je 20 MB",
     choose: "Dateien wählen",
-    drop: "Oder Dateien hier ablegen.",
+    drop: "Oder Dateien hier ablegen",
     remove: "Entfernen",
     notes: "Notizen",
-    notesHint: "Pflicht, wenn Sie keine Zeichnung anhängen. Beschreiben Sie das Teil oder nennen Sie Pulver-RAL, Beschläge, Schweißhinweise oder eine NDA-Bitte.",
+    notesHint: "Ohne Zeichnung das Teil beschreiben. RAL, Beschläge, Schweißhinweise oder NDA-Bitte hier.",
     email: "Geschäftliche E-Mail",
     material: "Werkstoff",
-    materialHint: "Hat das Teil mehr als einen Werkstoff, wählen Sie den Hauptwerkstoff und schreiben Sie die anderen in die Notizen.",
+    materialHint: "Hauptwerkstoff; andere in die Notizen.",
     materialPlaceholder: "Werkstoff wählen",
     quantity: "Stückzahl (diese Bestellung)",
     quantityHint: "Teile in diesem Los.",
-    annual: "Geschätzte Jahresmenge (Stück)",
-    annualHint: "Teile, die Sie über zwölf Monate erwarten, einschließlich späterer Lose.",
+    annual: "Geschätzte Jahresmenge",
+    annualHint: "Erwartete Stückzahl über zwölf Monate.",
     annualUnknown: "Weiß ich noch nicht",
     name: "Name",
-    nameHint: "Die Person, der wir antworten sollen.",
+    nameHint: "An wen wir antworten sollen.",
     company: "Firma",
     country: "Land",
     countryPlaceholder: "Land wählen",
     countryFocus: "Schwerpunkt",
     countryOther: "Andere",
     thickness: "Dicke (mm)",
-    thicknessHint: "Beispiel: 2.0. Leer lassen, wenn die Zeichnung sie nennt oder Sie sie noch nicht kennen.",
+    thicknessHint: "Leer lassen, wenn die Zeichnung sie nennt.",
     delivery: "Lieferdatum",
-    deliveryHint: "Das Datum, an dem Sie die Teile wollen. Die Lieferzeit wird im Angebot bestätigt.",
+    deliveryHint: "Die Lieferzeit wird im Angebot bestätigt.",
     flexible: "Flexibel",
     optional: "optional",
+    optionalDetails: "Optionale Angaben",
+    stepPart: "Teil",
+    stepSpecs: "Daten",
+    stepContact: "Kontakt",
+    continue: "Weiter",
+    back: "Zurück",
     submit: "Angebot anfragen",
     sending: "Wird gesendet…",
     privacyBefore: "Zeichnungen liegen in einem privaten Dateispeicher und werden für das Angebot genutzt.",

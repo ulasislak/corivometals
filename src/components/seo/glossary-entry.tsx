@@ -1,0 +1,1 @@
+export { GuidePageView as GlossaryEntryView } from "@/components/seo/guide-page";

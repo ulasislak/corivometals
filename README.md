@@ -1,6 +1,6 @@
 # Corivo
 
-Marketing site and quote request form for sheet metal parts, enclosures, and CNC parts made in Türkiye.
+Marketing site and quote request form for sheet metal parts, enclosures, and CNC parts. Shipping is worldwide.
 
 ## Stack
 
